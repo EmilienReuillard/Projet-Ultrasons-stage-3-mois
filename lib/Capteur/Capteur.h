@@ -19,6 +19,7 @@ class Capteur
     void MaZ(); //Mise a Zero des différentes variables
 
     void emissionMux(int i);  //Emission en fonction de la position de i (dans le temps)
+    void emissionSimpleMux();
 
     void uploadData(int i);  //met a jours le i-ème élément de la liste vReal
 
@@ -30,6 +31,8 @@ class Capteur
 
     int Prorocole_detection();  //Regroupe les 5 fonctions précédentes
 
+    void Prorocole_alternance_capt(); //programme le plus simple possible pour mesurer les distances.
+
     void distance(int affiche=0);  //calcul la distance; i = 1: affiche;  i = 0: affiche pas
 
     void affiche(); //affiche les données essentielles
@@ -37,6 +40,9 @@ class Capteur
 
 
   private:
+
+    /* NOMBRE DE CAPT */
+    int N_capt_tot = 0; //nombre de capteur total
 
     /* PERIODE */
     int T = 0;  //ms
