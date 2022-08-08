@@ -4,6 +4,8 @@ Capteur::Capteur(int pinIn_, int pinOUT_, int T_){
   this->pinIn = pinIn_;
   this->pinOUT = pinOUT_;
   this->T = T_;
+
+  N_capt_tot++;
 }
 
 void Capteur::defPinMod(){
@@ -224,16 +226,25 @@ int Capteur::valid_freq(int Nvalid, int err){
 }
 
 int Capteur::Prorocole_detection(){
-this->moyenne();
-this->ech_a_zero();
-this->deriv_list();
-this->detection();
-this->valid_freq(3,1);
+  this->moyenne();
+  this->ech_a_zero();
+  this->deriv_list();
+  this->detection();
+  this->valid_freq(3,1);
+}
+
+void Capteur::Prorocole_alternance_capt(){
+  for (int i = 0; i < N_capt_tot; i++)
+  {
+    /* code */
+  }
+  
 }
 
 //Fonction pour emmetre des ultrasons
 //N_em: Nb d'émission par salve //T: temps entre 2 trigger
-void Capteur::emissionMux(int i){
+/*
+void Capteur::emission(int i){
   
   if(T * (int)compt == i*((int)samplingFrequency/1000) && (int)compt < N_em){ //(freq/1000) si on doit augmanter la fréquence.
     digitalWrite(pinOUT,HIGH);
@@ -245,6 +256,7 @@ void Capteur::emissionMux(int i){
     compt++;
   }
 }
+*/
 
 void Capteur::distance(int affiche = 0){
     dist = (first_re - first_em) * SOUND_SPEED;

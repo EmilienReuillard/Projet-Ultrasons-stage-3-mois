@@ -128,8 +128,6 @@ void loop()
   Cap4.Prorocole_detection();
   Cap5.Prorocole_detection();
   Cap6.Prorocole_detection();
-  
-  
 
   /* DELAY */
   //while(1);
