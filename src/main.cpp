@@ -40,6 +40,7 @@ Capteur Cap6(InpA6,6,17);
 
 double seuil = 10000; //Arbitraire en fonction des meures testés
 int erreur = 1;  //erreur acceptable en ms
+int detection_mode = 0; //0:salves 1:emission simples
 
 #define SCL_INDEX 0x00
 #define SCL_TIME 0x01
@@ -79,59 +80,76 @@ void setup()
 
 void loop()
 {
-  /*REMISE A ZEROS VARIABLES*/
-  Cap0.MaZ();
-  Cap1.MaZ();
-  Cap2.MaZ();
-  Cap3.MaZ();
-  Cap4.MaZ();
-  Cap5.MaZ();
-  Cap6.MaZ();
-  
-  
-  /*SAMPLING*/
-  microseconds = micros();
-  for(int i=0; i<samples; i++)
+  switch (detection_mode)
   {
-      /*EMISSION*/
+  case 0:
+    /*REMISE A ZEROS VARIABLES*/
+    Cap0.MaZ();
+    Cap1.MaZ();
+    Cap2.MaZ();
+    Cap3.MaZ();
+    Cap4.MaZ();
+    Cap5.MaZ();
+    Cap6.MaZ();
+    
+    
+    /*SAMPLING*/
+    microseconds = micros();
+    for(int i=0; i<samples; i++)
+    {
+        /*EMISSION*/
 
-      Cap0.emissionMux(i);
-      Cap1.emissionMux(i);
-      Cap2.emissionMux(i);
-      Cap3.emissionMux(i);
-      Cap4.emissionMux(i);
-      Cap5.emissionMux(i);
-      Cap6.emissionMux(i);
+        Cap0.emissionMux(i);
+        Cap1.emissionMux(i);
+        Cap2.emissionMux(i);
+        Cap3.emissionMux(i);
+        Cap4.emissionMux(i);
+        Cap5.emissionMux(i);
+        Cap6.emissionMux(i);
 
-      /*RECEPTION*/
-      Cap0.uploadData(i);
-      Cap1.uploadData(i);
-      Cap2.uploadData(i);
-      Cap3.uploadData(i);
-      Cap4.uploadData(i);
-      Cap5.uploadData(i);
-      Cap6.uploadData(i);
-      
-      while(micros() - microseconds < sampling_period_us){
-        //empty loop
-      }
-      microseconds += sampling_period_us;
+        /*RECEPTION*/
+        Cap0.uploadData(i);
+        Cap1.uploadData(i);
+        Cap2.uploadData(i);
+        Cap3.uploadData(i);
+        Cap4.uploadData(i);
+        Cap5.uploadData(i);
+        Cap6.uploadData(i);
+        
+        while(micros() - microseconds < sampling_period_us){
+          //empty loop
+        }
+        microseconds += sampling_period_us;
+    }
+    
+
+    /* Traitement du signal */
+
+    Cap0.Prorocole_detection();
+    Cap1.Prorocole_detection();
+    Cap2.Prorocole_detection();
+    Cap3.Prorocole_detection();
+    Cap4.Prorocole_detection();
+    Cap5.Prorocole_detection();
+    Cap6.Prorocole_detection();
+
+    /* DELAY */
+    //while(1);
+    delay(2000); /* Repeat after delay */
+  break;
+  
+  case 1:
+    /*REMISE A ZEROS VARIABLES*/
+    Cap0.MaZ();
+    Cap1.MaZ();
+    Cap2.MaZ();
+    Cap3.MaZ();
+    Cap4.MaZ();
+    Cap5.MaZ();
+    Cap6.MaZ();
+  break;
   }
   
-
-  /* Traitement du signal */
-
-  Cap0.Prorocole_detection();
-  Cap1.Prorocole_detection();
-  Cap2.Prorocole_detection();
-  Cap3.Prorocole_detection();
-  Cap4.Prorocole_detection();
-  Cap5.Prorocole_detection();
-  Cap6.Prorocole_detection();
-
-  /* DELAY */
-  //while(1);
-  delay(2000); /* Repeat after delay */
 }
 
 /*----------------------------------------------------------------------------------*/

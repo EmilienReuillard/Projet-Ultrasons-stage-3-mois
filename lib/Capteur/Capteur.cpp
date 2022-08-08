@@ -233,10 +233,30 @@ int Capteur::Prorocole_detection(){
   this->valid_freq(3,1);
 }
 
+int Capteur::detectionImpulsion(){
+  this->lock_first_re = 0;
+  
+  for(int i = 0; i < samples; i++){
+    if(vReal_bin[i] == 1){
+      
+      if(lock_first_re == 0){ //mise en mémoire 1ere réception
+        this->first_re = i*1000*(1.0/samplingFrequency);  //en ms
+        this->lock_first_re = 1;
+        return 1;
+      }
+      
+    }
+  }
+  return 0;
+}
+
 void Capteur::Prorocole_alternance_capt(){
   for (int i = 0; i < N_capt_tot; i++)
   {
-    /* code */
+    this->moyenne();
+    this->ech_a_zero();
+    this->deriv_list();
+    this->detectionImpulsion();
   }
   
 }

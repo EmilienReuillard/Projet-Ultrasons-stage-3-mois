@@ -27,11 +27,11 @@ class Capteur
     void moyenne();
     void ech_a_zero();  //échelonne à 0 à partir de la moyenne
     void detection();  //renvoie un signal binaire en fonction de ce a été ou non détecté
+    int detectionImpulsion(); //détecte une impulsion unique
     int  valid_freq(int Nvalid = 3, int err = 1);    //Vérifie si un signal a bien été détecté
 
     int Prorocole_detection();  //Regroupe les 5 fonctions précédentes
-
-    void Prorocole_alternance_capt(); //programme le plus simple possible pour mesurer les distances.
+    void Prorocole_alternance_capt(); //programme le plus simple possible pour mesurer les distances. A utiliser avec emissionSimpleMux()
 
     void distance(int affiche=0);  //calcul la distance; i = 1: affiche;  i = 0: affiche pas
 
