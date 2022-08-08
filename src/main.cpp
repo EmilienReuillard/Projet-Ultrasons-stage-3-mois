@@ -120,53 +120,14 @@ void loop()
   
 
   /* Traitement du signal */
-  //0
-  Cap0.moyenne();
-  Cap0.ech_a_zero();
-  Cap0.deriv_list();
-  Cap0.detection();
-  Cap0.valid_freq(3,1);
-  Cap0.distance(1);
 
-  //1
-  Cap1.moyenne();
-  Cap1.ech_a_zero();
-  Cap1.deriv_list();
-  Cap1.detection();
-  Cap1.valid_freq(3,1);
-  Cap1.distance(1);  
-  
-  //3
-  Cap3.moyenne();
-  Cap3.ech_a_zero();
-  Cap3.deriv_list();
-  Cap3.detection();
-  Cap3.valid_freq(3,1);
-  Cap3.distance(1);  
-
-  //4
-  Cap4.moyenne();
-  Cap4.ech_a_zero();
-  Cap4.deriv_list();
-  Cap4.detection();
-  Cap4.valid_freq(3,1);
-  Cap4.distance(1);
-
-  //5
-  Cap5.moyenne();
-  Cap5.ech_a_zero();
-  Cap5.deriv_list();
-  Cap5.detection();
-  Cap5.valid_freq(3,1);
-  Cap5.distance(1);
-
-  //6
-  Cap6.moyenne();
-  Cap6.ech_a_zero();
-  Cap6.deriv_list();
-  Cap6.detection();
-  Cap6.valid_freq(3,1);
-  Cap6.distance(1);
+  Cap0.Prorocole_detection();
+  Cap1.Prorocole_detection();
+  Cap2.Prorocole_detection();
+  Cap3.Prorocole_detection();
+  Cap4.Prorocole_detection();
+  Cap5.Prorocole_detection();
+  Cap6.Prorocole_detection();
   
   
 
