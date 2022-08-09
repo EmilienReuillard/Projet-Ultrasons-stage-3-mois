@@ -26,7 +26,7 @@ class Capteur
     void moyenne();
     void ech_a_zero();  //échelonne à 0 à partir de la moyenne
     void detection();  //renvoie un signal binaire en fonction de ce a été ou non détecté
-    int  valid_freq(int Nvalid = 3, int err = 1);    //Vérifie si un signal a bien été détecté
+    int valid_freq(int Nvalid = 3, int err = 1);    //Vérifie si un signal a bien été détecté
     int Prorocole_detection();  //Regroupe les 5 fonctions précédentes
 
     /*EMISSION SIMPLES*/
