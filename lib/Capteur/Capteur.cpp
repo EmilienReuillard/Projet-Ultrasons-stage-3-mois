@@ -270,60 +270,60 @@ void Capteur::emissionSimpleMux(){
   switch (this->pinOUT)
   {
     case 0:
-      S0 = 0; 
-      S1 = 0;
-      S2 = 0;
-      S3 = 0;
+      S0 = LOW; 
+      S1 = LOW;
+      S2 = LOW;
+      S3 = LOW;
     break;
     
     case 1:
-      S0 = 0; 
-      S1 = 1;
-      S2 = 0;
-      S3 = 0;
+      S0 = LOW; 
+      S1 = HIGH;
+      S2 = LOW;
+      S3 = LOW;
     break;
     
     case 2:
-      S0 = 0; 
-      S1 = 0;
-      S2 = 1;
-      S3 = 0;
+      S0 = LOW; 
+      S1 = LOW;
+      S2 = HIGH;
+      S3 = LOW;
     break;
     
     case 3:
-      S0 = 0; 
-      S1 = 1;
-      S2 = 1;
-      S3 = 0;
+      S0 = LOW; 
+      S1 = HIGH;
+      S2 = HIGH;
+      S3 = LOW;
     break;
     
     case 4:
-      S0 = 0; 
-      S1 = 0;
-      S2 = 0;
-      S3 = 1;
+      S0 = LOW; 
+      S1 = LOW;
+      S2 = LOW;
+      S3 = HIGH;
     break;
     
     case 5:
-      S0 = 0; 
-      S1 = 1;
-      S2 = 0;
-      S3 = 1;
+      S0 = LOW; 
+      S1 = HIGH;
+      S2 = LOW;
+      S3 = HIGH;
     break;
     
     case 6:
-      S0 = 0; 
-      S1 = 0;
-      S2 = 1;
-      S3 = 1;
+      S0 = LOW; 
+      S1 = LOW;
+      S2 = HIGH;
+      S3 = HIGH;
     break;
 
     //si on ne veut pas émettre, on emmet sur une pin pas connectée
     case 7:
-      S0 = 0; 
-      S1 = 1;
-      S2 = 1;
-      S3 = 1;
+      S0 = LOW; 
+      S1 = HIGH;
+      S2 = HIGH;
+      S3 = HIGH;
     break;
   }
 
