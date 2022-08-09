@@ -15,26 +15,28 @@ class Capteur
     ~Capteur();
 
     void defPinMod(); //pinMode(pinIN) ; pinMode(pinOUT)
-
     void MaZ(); //Mise a Zero des différentes variables
-
-    void emissionMux(int i);  //Emission en fonction de la position de i (dans le temps)
-    void emissionSimpleMux(int i);
-
     void uploadData(int i);  //met a jours le i-ème élément de la liste vReal
 
+    /*EMISSION SALVES*/
+
+    void emissionMux(int i);  //Emission en fonction de la position de i (dans le temps)
+    
     void deriv_list(int mode = 0); //Dérive vReal dans vReal_der
     void moyenne();
     void ech_a_zero();  //échelonne à 0 à partir de la moyenne
     void detection();  //renvoie un signal binaire en fonction de ce a été ou non détecté
-    int detectionImpulsion(); //détecte une impulsion unique
     int  valid_freq(int Nvalid = 3, int err = 1);    //Vérifie si un signal a bien été détecté
-
     int Prorocole_detection();  //Regroupe les 5 fonctions précédentes
+
+    /*EMISSION SIMPLES*/
+
+    void emissionSimpleMux(int i);  //Emet une fois
     void Prorocole_alternance_capt(); //programme le plus simple possible pour mesurer les distances. A utiliser avec emissionSimpleMux()
+    int detectionSimple(int i); //détecte une impulsion unique
+    int derivAndBinAuPas(int i); //dérive pas à pas et replis la liste binaire en fonction d'un seuil prédéfini.
 
     void distance(int affiche=0);  //calcul la distance; i = 1: affiche;  i = 0: affiche pas
-
     void affiche(); //affiche les données essentielles
 
 
@@ -74,6 +76,7 @@ class Capteur
 
     /* Validation de la détection du signal*/
     int valid = 0;
+    int seuil = 5000; //seuil de détection dérivée pour Detection simple
 
     /* Emission */
     int compt = 0;  //compte de nombre de plip qui ont été émis
