@@ -41,12 +41,16 @@ class Capteur
     void distance(int affiche=0);  //calcul la distance; i = 1: affiche;  i = 0: affiche pas
     void affiche(); //affiche les données essentielles
 
+    /*AFFICHAGE*/
+    void afficheReception();  //Affiche pour chaque capteur si il reçoit ou non, ainsi que la distance
+
 
 
   private:
 
     /* NOMBRE DE CAPT */
     int N_capt_tot = 0; //nombre de capteur total
+    int N_capt = 0;     //n° attitré du capteur
 
     /* PERIODE */
     int T = 0;  //ms
@@ -92,17 +96,4 @@ class Capteur
     
 };
 
-void affiche_list(const double *list){
-    for (int i = 0; i < samples; i++)
-    {
-        Serial.println(list[i]);
-    }
-}
-
-void defPinModMux(int a,int b,int c,int d){
-  pinMode(a,OUTPUT);
-  pinMode(b,OUTPUT);
-  pinMode(c,OUTPUT);
-  pinMode(d,OUTPUT);
-}
 #endif
