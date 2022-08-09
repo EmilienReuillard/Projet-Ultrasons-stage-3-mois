@@ -36,6 +36,7 @@ class Capteur
     void BreakProtocole(int i); //Sort de la boucle de mesure si on capte un truc.
     int detectionSimple(int i); //détecte une impulsion unique
     int derivAndBinAuPas(int i); //dérive pas à pas et replis la liste binaire en fonction d'un seuil prédéfini.
+    int validationBreak();  //si un signal est détecté, (this->valid) on renvoie 1, pour faire un break.
 
     void distance(int affiche=0);  //calcul la distance; i = 1: affiche;  i = 0: affiche pas
     void affiche(); //affiche les données essentielles

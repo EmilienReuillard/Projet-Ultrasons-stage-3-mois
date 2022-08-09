@@ -362,9 +362,19 @@ int Capteur::detectionSimple(int i){
     this->first_re = i*1000*(1.0/samplingFrequency);  //en ms
     this->first_re_real_time = micros();
     this->lock_first_re = 1;
+    this->valid = 1;
     }
+  return 0;
+}
+
+int Capteur::validationBreak(){
+  if(this->valid == 1){
+    return 1;
+  }
+  else{
     return 0;
   }
+}
 
 void Capteur::distance(int affiche = 0){
     dist = (first_re - first_em) * SOUND_SPEED * 0.5;

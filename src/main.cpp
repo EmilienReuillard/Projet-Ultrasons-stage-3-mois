@@ -148,13 +148,14 @@ void loop()
     Cap5.MaZ();
     Cap6.MaZ();
 
-    //Avec les parametres par defaut, une boucle met à peu près 0.2s a se faire
+    //Avec les parametres par defaut, une boucle met à peu près 0.2s a se faire si rien n'est capté
     /*Cap0*/
     microseconds = micros();
     Cap0.emissionSimpleMux();
     for(int i=0; i<samples; i++)
     {
       Cap0.Prorocole_alternance_capt(i);
+      if( Cap0.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
       }
