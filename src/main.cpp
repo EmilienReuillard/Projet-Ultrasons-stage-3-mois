@@ -148,17 +148,91 @@ void loop()
     Cap5.MaZ();
     Cap6.MaZ();
 
+    //Avec les parametres par defaut, une boucle met à peu près 0.2s a se faire
+    /*Cap0*/
+    microseconds = micros();
+    Cap0.emissionSimpleMux();
     for(int i=0; i<samples; i++)
     {
-      Cap0.uploadData(i);
-      
-
-
+      Cap0.Prorocole_alternance_capt(i);
       while(micros() - microseconds < sampling_period_us){
           //empty loop
-        }
-        microseconds += sampling_period_us;
+      }
+      microseconds += sampling_period_us;
     }
+
+    /*Cap1*/
+    microseconds = micros();
+    Cap1.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap1.Prorocole_alternance_capt(i);
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap2*/
+    microseconds = micros();
+    Cap2.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap2.Prorocole_alternance_capt(i);
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap3*/
+    microseconds = micros();
+    Cap3.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap3.Prorocole_alternance_capt(i);
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap4*/
+    microseconds = micros();
+    Cap4.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap4.Prorocole_alternance_capt(i);
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap5*/
+    microseconds = micros();
+    Cap5.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap5.Prorocole_alternance_capt(i);
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap6*/
+    microseconds = micros();
+    Cap6.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap6.Prorocole_alternance_capt(i);
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
 
   break;
   }

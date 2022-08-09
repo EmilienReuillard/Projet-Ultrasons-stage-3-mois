@@ -31,8 +31,9 @@ class Capteur
 
     /*EMISSION SIMPLES*/
 
-    void emissionSimpleMux(int i);  //Emet une fois
-    void Prorocole_alternance_capt(); //programme le plus simple possible pour mesurer les distances. A utiliser avec emissionSimpleMux()
+    void emissionSimpleMux();  //Emet une fois
+    void Prorocole_alternance_capt(int i); //programme le plus simple possible pour mesurer les distances. A utiliser avec emissionSimpleMux()
+    void BreakProtocole(int i); //Sort de la boucle de mesure si on capte un truc.
     int detectionSimple(int i); //détecte une impulsion unique
     int derivAndBinAuPas(int i); //dérive pas à pas et replis la liste binaire en fonction d'un seuil prédéfini.
 

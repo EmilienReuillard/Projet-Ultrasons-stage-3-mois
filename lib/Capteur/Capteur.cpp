@@ -248,16 +248,14 @@ int Capteur::Prorocole_detection(){
 /*------------------------------------CASE 2----------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 
-void Capteur::Prorocole_alternance_capt(){
-  for (int i = 0; i < N_capt_tot; i++)
-  {
+void Capteur::Prorocole_alternance_capt(int i){
     this->uploadData(i);
     this->derivAndBinAuPas(i);
     this->detectionSimple(i);
-  }
+    this->distance();
 }
 
-void Capteur::emissionSimpleMux(int i){
+void Capteur::emissionSimpleMux(){
   //Pins du mux en entrée// 1: car OUT bare
   int S0 = 0; 
   int S1 = 0;
@@ -330,7 +328,7 @@ void Capteur::emissionSimpleMux(int i){
   digitalWrite(4,S2);
   digitalWrite(5,S3);
   if(lock_first_em == 0){
-    first_em = i*1000*(1.0/samplingFrequency);  //en ms
+    first_em = 0;  //en ms// On considère l'émission comme le début du timing
     lock_first_em = 1;
   }
   //On remet en LOW à la fin
