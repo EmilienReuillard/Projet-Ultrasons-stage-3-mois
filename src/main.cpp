@@ -168,6 +168,7 @@ void loop()
     for(int i=0; i<samples; i++)
     {
       Cap1.Prorocole_alternance_capt(i);
+      if( Cap1.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
       }
@@ -180,6 +181,7 @@ void loop()
     for(int i=0; i<samples; i++)
     {
       Cap2.Prorocole_alternance_capt(i);
+      if( Cap2.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
       }
@@ -192,6 +194,7 @@ void loop()
     for(int i=0; i<samples; i++)
     {
       Cap3.Prorocole_alternance_capt(i);
+      if( Cap3.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
       }
@@ -204,6 +207,7 @@ void loop()
     for(int i=0; i<samples; i++)
     {
       Cap4.Prorocole_alternance_capt(i);
+      if( Cap4.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
       }
@@ -216,6 +220,7 @@ void loop()
     for(int i=0; i<samples; i++)
     {
       Cap5.Prorocole_alternance_capt(i);
+      if( Cap5.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
       }
@@ -228,12 +233,12 @@ void loop()
     for(int i=0; i<samples; i++)
     {
       Cap6.Prorocole_alternance_capt(i);
+      if( Cap6.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
       }
       microseconds += sampling_period_us;
     }
-
 
   break;
   }
