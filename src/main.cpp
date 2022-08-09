@@ -3,6 +3,7 @@
 #include "Capteur.h"
 #include "Fonctions.h"
 
+/*Declaration Pins Analogiques*/
 #define InpA0 A0
 #define InpA1 A1
 #define InpA2 A2
@@ -12,7 +13,6 @@
 #define InpA6 A6
 
 /*------------------------------------FONCTIONS-------------------------------------*/
-
 void PrintVector(double *vData, uint16_t bufferSize, uint8_t scaleType);
 
 /*------------------------------------------------------------------------------------

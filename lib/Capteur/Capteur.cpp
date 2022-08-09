@@ -23,6 +23,8 @@ void Capteur::MaZ(){
     this->first_re_real_time = 0;
     this->compt = 0;            //compte le nombre d'émission
     this->dist = 0;             //distance
+    this->dist_real_time = 0;
+    this->valid = 0;
 
     delete[] vReal;    
     delete[] vReal_ech;
@@ -380,7 +382,7 @@ int Capteur::validationBreak(){
 
 void Capteur::distance(int affiche = 0){
     dist = (first_re - first_em) * SOUND_SPEED * 0.5;
-    dist_real_time = (first_re_real_time - first_em_real_time)*1000*SOUND_SPEED*0.5;
+    dist_real_time = (first_re_real_time - first_em_real_time)*1000*SOUND_SPEED*0.5;  //*1000 car le temps est micros secondes
     if(affiche==1){
         Serial.print("D = ");
         Serial.println(dist);
@@ -393,7 +395,7 @@ void Capteur::distance(int affiche = 0){
 
 void Capteur::afficheReception(){
   Serial.print("Capt");Serial.print(this->N_capt);Serial.print(";");
-  Serial.print("Valid = ");Serial.print(this->valid);
+  Serial.print("Valid = ");Serial.print(this->valid);Serial.print(";");
   Serial.print("D = ");Serial.print(this->dist);
 }
 
