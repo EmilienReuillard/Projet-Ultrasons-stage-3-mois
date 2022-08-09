@@ -19,7 +19,17 @@ void Capteur::MaZ(){
     this->first_re = 0;         //mémoire de la première la réception
     this->compt = 0;            //compte le nombre d'émission
     this->dist = 0;             //distance
+
+    delete[] vReal;    
+    delete[]vReal_ech;
+    delete[]vReal_der;
+    delete[]vReal_bin;
+    delete[]vImag;    
 }
+
+/*----------------------------------------------------------------------------------*/
+/*------------------------------------CASE 1----------------------------------------*/
+/*----------------------------------------------------------------------------------*/
 
 void Capteur::emissionMux(int i){
   //Pins du mux en entrée// 1: car OUT bare
@@ -233,30 +243,17 @@ int Capteur::Prorocole_detection(){
   this->valid_freq(3,1);
 }
 
-int Capteur::detectionImpulsion(){
-  this->lock_first_re = 0;
-  
-  for(int i = 0; i < samples; i++){
-    if(vReal_bin[i] == 1){
-      
-      if(lock_first_re == 0){ //mise en mémoire 1ere réception
-        this->first_re = i*1000*(1.0/samplingFrequency);  //en ms
-        this->lock_first_re = 1;
-        return 1;
-      }
-      
-    }
-  }
-  return 0;
-}
+
+/*----------------------------------------------------------------------------------*/
+/*------------------------------------CASE 2----------------------------------------*/
+/*----------------------------------------------------------------------------------*/
 
 void Capteur::Prorocole_alternance_capt(){
   for (int i = 0; i < N_capt_tot; i++)
   {
-    this->moyenne();
-    this->ech_a_zero();
-    this->deriv_list();
-    this->detectionImpulsion();
+    this->uploadData(i);
+    this->derivAndBinAuPas(i);
+    this->detectionSimple(i);
   }
 }
 
@@ -336,24 +333,36 @@ void Capteur::emissionSimpleMux(int i){
     first_em = i*1000*(1.0/samplingFrequency);  //en ms
     lock_first_em = 1;
   }
+  //On remet en LOW à la fin
+  digitalWrite(2,LOW);
+  digitalWrite(3,LOW);
+  digitalWrite(4,LOW);
+  digitalWrite(5,LOW);
 }
 
-//Fonction pour emmetre des ultrasons
-//N_em: Nb d'émission par salve //T: temps entre 2 trigger
-/*
-void Capteur::emission(int i){
-  
-  if(T * (int)compt == i*((int)samplingFrequency/1000) && (int)compt < N_em){ //(freq/1000) si on doit augmanter la fréquence.
-    digitalWrite(pinOUT,HIGH);
-    digitalWrite(pinOUT,LOW);
-    if(lock_first_em == 0){
-      first_em = i*1000*(1.0/samplingFrequency);  //en ms
-      lock_first_em = 1;
-    }
-    compt++;
+int Capteur::derivAndBinAuPas(int i){
+  if(i==samples-1){
+    vReal_der[i] = 0;
   }
+  if(i>0){
+    this->vReal_der[i-1] = (vReal[i]-vReal[i-1])/(1.0*T); //vReal_der[i-1] pour commencer à 0 et éviter un out of range avec vReal lors de l primière étape
+  }
+  if(vReal_der[i-1]>seuil){
+    this->vReal_bin[i-1] = 1;
+  }
+  else{
+    this->vReal_bin[i-1] = 0;
+  }
+  return 0;
 }
-*/
+
+int Capteur::detectionSimple(int i){ 
+  if(i < samples && this->lock_first_re == 0 && vReal_bin[i] == 1 ){
+    this->first_re = i*1000*(1.0/samplingFrequency);  //en ms
+    this->lock_first_re = 1;
+    }
+    return 0;
+  }
 
 void Capteur::distance(int affiche = 0){
     dist = (first_re - first_em) * SOUND_SPEED;

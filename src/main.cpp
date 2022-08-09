@@ -147,6 +147,19 @@ void loop()
     Cap4.MaZ();
     Cap5.MaZ();
     Cap6.MaZ();
+
+    for(int i=0; i<samples; i++)
+    {
+      Cap0.uploadData(i);
+      
+
+
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+        }
+        microseconds += sampling_period_us;
+    }
+
   break;
   }
   
