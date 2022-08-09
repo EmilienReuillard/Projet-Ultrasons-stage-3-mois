@@ -22,7 +22,7 @@ void Capteur::MaZ(){
 }
 
 void Capteur::emissionMux(int i){
-    //Pins du mux en entrée// 1: car OUT bare
+  //Pins du mux en entrée// 1: car OUT bare
   int S0 = 0; 
   int S1 = 0;
   int S2 = 0;
@@ -258,7 +258,84 @@ void Capteur::Prorocole_alternance_capt(){
     this->deriv_list();
     this->detectionImpulsion();
   }
-  
+}
+
+void Capteur::emissionSimpleMux(int i){
+  //Pins du mux en entrée// 1: car OUT bare
+  int S0 = 0; 
+  int S1 = 0;
+  int S2 = 0;
+  int S3 = 0;
+
+  //Capteur sur lequel on veut émettre; ATTENTION, ce n'est le choix de la pin de sortie!
+  switch (this->pinOUT)
+  {
+    case 0:
+      S0 = 0; 
+      S1 = 0;
+      S2 = 0;
+      S3 = 0;
+    break;
+    
+    case 1:
+      S0 = 0; 
+      S1 = 1;
+      S2 = 0;
+      S3 = 0;
+    break;
+    
+    case 2:
+      S0 = 0; 
+      S1 = 0;
+      S2 = 1;
+      S3 = 0;
+    break;
+    
+    case 3:
+      S0 = 0; 
+      S1 = 1;
+      S2 = 1;
+      S3 = 0;
+    break;
+    
+    case 4:
+      S0 = 0; 
+      S1 = 0;
+      S2 = 0;
+      S3 = 1;
+    break;
+    
+    case 5:
+      S0 = 0; 
+      S1 = 1;
+      S2 = 0;
+      S3 = 1;
+    break;
+    
+    case 6:
+      S0 = 0; 
+      S1 = 0;
+      S2 = 1;
+      S3 = 1;
+    break;
+
+    //si on ne veut pas émettre, on emmet sur une pin pas connectée
+    case 7:
+      S0 = 0; 
+      S1 = 1;
+      S2 = 1;
+      S3 = 1;
+    break;
+  }
+
+  digitalWrite(2,S0);
+  digitalWrite(3,S1);
+  digitalWrite(4,S2);
+  digitalWrite(5,S3);
+  if(lock_first_em == 0){
+    first_em = i*1000*(1.0/samplingFrequency);  //en ms
+    lock_first_em = 1;
+  }
 }
 
 //Fonction pour emmetre des ultrasons

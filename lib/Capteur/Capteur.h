@@ -19,7 +19,7 @@ class Capteur
     void MaZ(); //Mise a Zero des différentes variables
 
     void emissionMux(int i);  //Emission en fonction de la position de i (dans le temps)
-    void emissionSimpleMux();
+    void emissionSimpleMux(int i);
 
     void uploadData(int i);  //met a jours le i-ème élément de la liste vReal
 
