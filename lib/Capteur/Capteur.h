@@ -68,6 +68,9 @@ class Capteur
     int lock_first_re = 0;  //vérou mémoire pour la réception
     int first_re = 0;       //mémoire de la première la réception
 
+    int first_em_real_time = 0;
+    int first_re_real_time = 0;
+
     int compt = 0;          //compte le nombre d'émission
     int N_em = 5;           //défini le nb d'émission voulues
 
@@ -84,6 +87,7 @@ class Capteur
 
     /* Distances */
     double dist = 0;  //distance
+    double dist_real_time = 0;  //distance calculé avec le temps réel
     
 };
 

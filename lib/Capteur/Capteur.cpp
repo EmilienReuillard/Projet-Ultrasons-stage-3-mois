@@ -15,16 +15,18 @@ void Capteur::defPinMod(){
 void Capteur::MaZ(){
     this->lock_first_em = 0;    //vérou mémoire pour l'émission
     this->first_em = 0;         //mémoire de la première émission
+    this->first_em_real_time = 0;
     this->lock_first_re = 0;    //vérou mémoire pour la réception
     this->first_re = 0;         //mémoire de la première la réception
+    this->first_re_real_time = 0;
     this->compt = 0;            //compte le nombre d'émission
     this->dist = 0;             //distance
 
     delete[] vReal;    
-    delete[]vReal_ech;
-    delete[]vReal_der;
-    delete[]vReal_bin;
-    delete[]vImag;    
+    delete[] vReal_ech;
+    delete[] vReal_der;
+    delete[] vReal_bin;
+    delete[] vImag;    
 }
 
 /*----------------------------------------------------------------------------------*/
@@ -329,6 +331,7 @@ void Capteur::emissionSimpleMux(){
   digitalWrite(5,S3);
   if(lock_first_em == 0){
     first_em = 0;  //en ms// On considère l'émission comme le début du timing
+    first_em_real_time = micros();  //mise en mémoire du temps réel
     lock_first_em = 1;
   }
   //On remet en LOW à la fin
@@ -357,16 +360,22 @@ int Capteur::derivAndBinAuPas(int i){
 int Capteur::detectionSimple(int i){ 
   if(i < samples && this->lock_first_re == 0 && vReal_bin[i] == 1 ){
     this->first_re = i*1000*(1.0/samplingFrequency);  //en ms
+    this->first_re_real_time = micros();
     this->lock_first_re = 1;
     }
     return 0;
   }
 
 void Capteur::distance(int affiche = 0){
-    dist = (first_re - first_em) * SOUND_SPEED;
+    dist = (first_re - first_em) * SOUND_SPEED * 0.5;
+    dist_real_time = (first_re_real_time - first_em_real_time)*1000*SOUND_SPEED*0.5;
     if(affiche==1){
         Serial.print("D = ");
         Serial.println(dist);
+    }
+    if(affiche==2){
+      Serial.print("D_real =");
+      Serial.println(dist_real_time);
     }
 }
 
