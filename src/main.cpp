@@ -1,6 +1,7 @@
 #include "arduinoFFT.h"
 #include "math.h"
 #include "Capteur.h"
+#include "Fonctions.h"
 
 #define InpA0 A0
 #define InpA1 A1
