@@ -19,6 +19,4 @@ void defPinModMux(int a,int b,int c,int d){
   pinMode(d,OUTPUT);
 }
 
-
-
 #endif

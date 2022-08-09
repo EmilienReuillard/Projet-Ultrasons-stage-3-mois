@@ -1,10 +1,12 @@
 #include <capteur.h>
+#include <Fonctions.h>
 
 Capteur::Capteur(int pinIn_, int pinOUT_, int T_){
   this->pinIn = pinIn_;
   this->pinOUT = pinOUT_;
   this->T = T_;
 
+  N_capt = N_capt_tot;
   N_capt_tot++;
 }
 
@@ -389,8 +391,13 @@ void Capteur::distance(int affiche = 0){
     }
 }
 
+void Capteur::afficheReception(){
+  Serial.print("Capt");Serial.print(this->N_capt);Serial.print(";");
+  Serial.print("Valid = ");Serial.print(this->valid);
+  Serial.print("D = ");Serial.print(this->dist);
+}
+
 void Capteur::affiche(){
-  
   Serial.println("Data:\n");
   affiche_list(vReal);
   Serial.println("\nEchelonné:\n");
