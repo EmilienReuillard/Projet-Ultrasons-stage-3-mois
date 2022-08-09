@@ -125,7 +125,6 @@ void loop()
     
 
     /* Traitement du signal */
-
     Cap0.Prorocole_detection();
     Cap1.Prorocole_detection();
     Cap2.Prorocole_detection();
@@ -133,6 +132,15 @@ void loop()
     Cap4.Prorocole_detection();
     Cap5.Prorocole_detection();
     Cap6.Prorocole_detection();
+
+    /*AFFICHAGE*/
+    Cap0.afficheReception();
+    Cap1.afficheReception();
+    Cap2.afficheReception();
+    Cap3.afficheReception();
+    Cap4.afficheReception();
+    Cap5.afficheReception();
+    Cap6.afficheReception();
 
     /* DELAY */
     //while(1);
@@ -240,6 +248,16 @@ void loop()
       }
       microseconds += sampling_period_us;
     }
+
+    /*AFFICHAGE*/
+    Cap0.afficheReception();
+    Cap1.afficheReception();
+    Cap2.afficheReception();
+    Cap3.afficheReception();
+    Cap4.afficheReception();
+    Cap5.afficheReception();
+    Cap6.afficheReception();
+
 
   break;
   }
