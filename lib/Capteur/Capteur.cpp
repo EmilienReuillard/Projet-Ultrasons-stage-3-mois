@@ -34,7 +34,7 @@ void Capteur::MaZ(){
 }
 
 /*----------------------------------------------------------------------------------*/
-/*------------------------------------CASE 1----------------------------------------*/
+/*------------------------------------CASE 0----------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 
 void Capteur::emissionSalveSimulMux(int i){
@@ -103,7 +103,9 @@ void Capteur::emissionSalveSimulMux(int i){
   }
 }
 
-void Capteur::emissionSalveSimul(int i){
+
+//Fonctionne dans une boucle, et i a une dimention temporelle qui détermine si oui ou non on peut émettre
+void Capteur::emissionSalve(int i){
   //si bon timing émission
   if(T * (int)compt == i*((int)samplingFrequency/1000) && (int)compt < N_em){ //(freq/1000) si on doit augmanter la fréquence.
     digitalWrite(pinOUT,HIGH);
@@ -240,7 +242,7 @@ int Capteur::Prorocole_0(){
 
 
 /*----------------------------------------------------------------------------------*/
-/*------------------------------------CASE 2----------------------------------------*/
+/*------------------------------------CASE 1----------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 
 void Capteur::Prorocole_1(int i){
@@ -353,6 +355,24 @@ int Capteur::validationBreak(){
     return 0;
   }
 }
+
+/*----------------------------------------------------------------------------------*/
+/*------------------------------------CASE 2----------------------------------------*/
+/*----------------------------------------------------------------------------------*/
+
+//on fait le même travail que lors d'une emission par salve simultané
+void Capteur::Prorocole_2(){
+  this->moyenne();
+  this->ech_a_zero();
+  this->deriv_list();
+  this->detection();
+  this->valid_freq(3,1);
+}
+
+
+/*----------------------------------------------------------------------------------*/
+/*------------------------------------OTHERS----------------------------------------*/
+/*----------------------------------------------------------------------------------*/
 
 void Capteur::distance(int affiche = 0){
     dist = (first_re - first_em) * SOUND_SPEED * 0.5;

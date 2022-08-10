@@ -21,7 +21,7 @@ class Capteur
     /*EMISSION SALVES SIMULTANEES -- CASE0*/
 
     void emissionSalveSimulMux(int i);  //Emission en fonction de la position de i (dans le temps)
-    void emissionSalveSimul(int i); //A utiliser dans un circuit sans MUX
+    void emissionSalve(int i); //A utiliser dans un circuit sans MUX
     void deriv_list(int mode = 0); //Dérive vReal dans vReal_der
     void moyenne();
     void ech_a_zero();  //échelonne à 0 à partir de la moyenne
@@ -41,13 +41,14 @@ class Capteur
 
     /*EMISSION SIMPLE AVEC SALVES -- CASE2*/
 
-    void emissionSimpleSimul(int i);  //emmet une salve lorqu'il est appelé
+    void Prorocole_2();
 
+    /*DISTANCE*/
     void distance(int affiche=0);  //calcul la distance; i = 1: affiche;  i = 0: affiche pas
-    void affiche(); //affiche les données essentielles
 
     /*AFFICHAGE*/
     void afficheReception();  //Affiche pour chaque capteur si il reçoit ou non, ainsi que la distance
+    void affiche(); //affiche les données essentielles
 
 
 

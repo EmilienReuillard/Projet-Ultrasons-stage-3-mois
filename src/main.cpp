@@ -273,7 +273,147 @@ void loop()
   /*------------------------------------------CASE 2---------------------------------------*/
   /*---------------------------------------------------------------------------------------*/
   case 2:
+    /*REMISE A ZEROS VARIABLES*/
+    Cap0.MaZ();
+    Cap1.MaZ();
+    Cap2.MaZ();
+    Cap3.MaZ();
+    Cap4.MaZ();
+    Cap5.MaZ();
+    Cap6.MaZ();
+    
+    
+    /*________________Cap0________________*/
+    microseconds = micros();
+    for(int i=0; i<samples; i++)
+    {
+      /*EMISSION/Reception*/
+      Cap0.emissionSalve(i);  //Emission si bon timing
+      Cap0.uploadData(i);     //Met a jours vReal
+      while(micros() - microseconds < sampling_period_us){
+        //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+    /*Traitement du signal*/
+    Cap0.Prorocole_2();
 
+    /*Affichage*/
+    Cap0.afficheReception();
+
+
+    /*________________Cap1________________*/
+    microseconds = micros();
+    for(int i=0; i<samples; i++)
+    {
+      /*EMISSION/Reception*/
+      Cap1.emissionSalve(i);  //Emission si bon timing
+      Cap1.uploadData(i);     //Met a jours vReal
+      while(micros() - microseconds < sampling_period_us){
+        //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+    /* Traitement du signal */
+    Cap1.Prorocole_2();
+
+    /*Affichage*/
+    Cap1.afficheReception();
+
+
+    /*________________Cap2________________*/
+    microseconds = micros();
+    for(int i=0; i<samples; i++)
+    {
+      /*EMISSION/Reception*/
+      Cap2.emissionSalve(i);  //Emission si bon timing
+      Cap2.uploadData(i);     //Met a jours vReal
+      while(micros() - microseconds < sampling_period_us){
+        //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+    /* Traitement du signal */
+    Cap2.Prorocole_2();
+
+    /*Affichage*/
+    Cap2.afficheReception();
+
+
+    /*________________Cap3________________*/
+    microseconds = micros();
+    for(int i=0; i<samples; i++)
+    {
+      /*EMISSION/Reception*/
+      Cap3.emissionSalve(i);  //Emission si bon timing
+      Cap3.uploadData(i);     //Met a jours vReal
+      while(micros() - microseconds < sampling_period_us){
+        //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+    /* Traitement du signal */
+    Cap3.Prorocole_2();
+
+    /*Affichage*/
+    Cap3.afficheReception();
+
+
+    /*________________Cap4________________*/
+    microseconds = micros();
+    for(int i=0; i<samples; i++)
+    {
+      /*EMISSION/Reception*/
+      Cap4.emissionSalve(i);  //Emission si bon timing
+      Cap4.uploadData(i);     //Met a jours vReal
+      while(micros() - microseconds < sampling_period_us){
+        //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+    /* Traitement du signal */
+    Cap4.Prorocole_2();
+
+    /*Affichage*/
+    Cap4.afficheReception();
+
+
+    /*________________Cap5________________*/
+    microseconds = micros();
+    for(int i=0; i<samples; i++)
+    {
+      /*EMISSION/Reception*/
+      Cap5.emissionSalve(i);  //Emission si bon timing
+      Cap5.uploadData(i);     //Met a jours vReal
+      while(micros() - microseconds < sampling_period_us){
+        //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+    /* Traitement du signal */
+    Cap5.Prorocole_2();
+
+    /*Affichage*/
+    Cap5.afficheReception();
+
+
+    /*________________Cap6________________*/
+    microseconds = micros();
+    for(int i=0; i<samples; i++)
+    {
+      /*EMISSION/Reception*/
+      Cap6.emissionSalve(i);  //Emission si bon timing
+      Cap6.uploadData(i);     //Met a jours vReal
+      while(micros() - microseconds < sampling_period_us){
+        //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+    /* Traitement du signal */
+    Cap6.Prorocole_2();
+
+    /*Affichage*/
+    Cap6.afficheReception();
   break;
 
   }
