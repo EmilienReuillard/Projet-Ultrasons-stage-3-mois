@@ -37,7 +37,7 @@ void Capteur::MaZ(){
 /*------------------------------------CASE 1----------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 
-void Capteur::emissionMux(int i){
+void Capteur::emissionSalveMux(int i){
   //Pins du mux en entrée// 1: car OUT bare
   int S0 = 0; 
   int S1 = 0;
@@ -103,7 +103,7 @@ void Capteur::emissionMux(int i){
   }
 }
 
-void Capteur::emission(int i){
+void Capteur::emissionSalve(int i){
   //si bon timing émission
   if(T * (int)compt == i*((int)samplingFrequency/1000) && (int)compt < N_em){ //(freq/1000) si on doit augmanter la fréquence.
     digitalWrite(pinOUT,HIGH);

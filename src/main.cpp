@@ -102,13 +102,13 @@ void loop()
     {
         /*EMISSION*/
 
-        Cap0.emissionMux(i);
-        Cap1.emissionMux(i);
-        Cap2.emissionMux(i);
-        Cap3.emissionMux(i);
-        Cap4.emissionMux(i);
-        Cap5.emissionMux(i);
-        Cap6.emissionMux(i);
+        Cap0.emissionSalveMux(i);
+        Cap1.emissionSalveMux(i);
+        Cap2.emissionSalveMux(i);
+        Cap3.emissionSalveMux(i);
+        Cap4.emissionSalveMux(i);
+        Cap5.emissionSalveMux(i);
+        Cap6.emissionSalveMux(i);
 
         /*RECEPTION*/
         Cap0.uploadData(i);

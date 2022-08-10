@@ -20,8 +20,8 @@ class Capteur
 
     /*EMISSION SALVES*/
 
-    void emissionMux(int i);  //Emission en fonction de la position de i (dans le temps)
-    void emission(int i); //A utiliser dans un circuit sans MUX
+    void emissionSalveMux(int i);  //Emission en fonction de la position de i (dans le temps)
+    void emissionSalve(int i); //A utiliser dans un circuit sans MUX
     void deriv_list(int mode = 0); //Dérive vReal dans vReal_der
     void moyenne();
     void ech_a_zero();  //échelonne à 0 à partir de la moyenne
