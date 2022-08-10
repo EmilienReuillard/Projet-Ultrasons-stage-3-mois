@@ -96,13 +96,26 @@ void Capteur::emissionMux(int i){
 
   //sinon pas d'émission
   else{
-    digitalWrite(2,0);
-    digitalWrite(3,1);
-    digitalWrite(4,1);
-    digitalWrite(5,1);
+    digitalWrite(2,LOW);
+    digitalWrite(3,HIGH);
+    digitalWrite(4,HIGH);
+    digitalWrite(5,HIGH);
   }
 }
 
+void Capteur::emission(int i){
+  //si bon timing émission
+  if(T * (int)compt == i*((int)samplingFrequency/1000) && (int)compt < N_em){ //(freq/1000) si on doit augmanter la fréquence.
+    digitalWrite(pinOUT,HIGH);
+    if(lock_first_em == 0){
+      first_em = i*1000*(1.0/samplingFrequency);  //en ms
+      first_em_real_time = micros();
+      lock_first_em = 1;
+    }
+    digitalWrite(pinOUT,LOW);
+    compt++;
+  }
+}
 
 void Capteur::uploadData(int i){
     vReal[i] = analogRead(pinIn);
@@ -277,10 +290,7 @@ void Capteur::emissionSimpleMux(){
 
     //si on ne veut pas émettre, on emmet sur une pin pas connectée
     case 7:
-      S0 = LOW; 
-      S1 = HIGH;
-      S2 = HIGH;
-      S3 = HIGH;
+      S0 = LOW; S1 = HIGH;  S2 = HIGH;  S3 = HIGH;
     break;
   }
 
@@ -288,6 +298,7 @@ void Capteur::emissionSimpleMux(){
   digitalWrite(3,S1);
   digitalWrite(4,S2);
   digitalWrite(5,S3);
+  
   if(lock_first_em == 0){
     first_em = 0;  //en ms// On considère l'émission comme le début du timing
     first_em_real_time = micros();  //mise en mémoire du temps réel
@@ -299,6 +310,14 @@ void Capteur::emissionSimpleMux(){
   digitalWrite(4,LOW);
   digitalWrite(5,LOW);
 }
+
+void Capteur::emissionSimple(int i){
+  //si bon timing émission
+  digitalWrite(pinOUT,HIGH);
+  first_em_real_time = micros();
+  first_em = i*1000*(1.0/samplingFrequency);  //en ms
+  digitalWrite(pinOUT,LOW);
+  }
 
 int Capteur::derivAndBinAuPas(int i){
   if(i==samples-1){

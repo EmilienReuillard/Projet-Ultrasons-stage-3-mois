@@ -21,7 +21,7 @@ class Capteur
     /*EMISSION SALVES*/
 
     void emissionMux(int i);  //Emission en fonction de la position de i (dans le temps)
-    
+    void emission(int i); //A utiliser dans un circuit sans MUX
     void deriv_list(int mode = 0); //Dérive vReal dans vReal_der
     void moyenne();
     void ech_a_zero();  //échelonne à 0 à partir de la moyenne
@@ -32,6 +32,7 @@ class Capteur
     /*EMISSION SIMPLES*/
 
     void emissionSimpleMux();  //Emet une fois
+    void emissionSimple(int i);
     void Prorocole_alternance_capt(int i); //programme le plus simple possible pour mesurer les distances. A utiliser avec emissionSimpleMux()
     void BreakProtocole(int i); //Sort de la boucle de mesure si on capte un truc.
     int detectionSimple(int i); //détecte une impulsion unique
