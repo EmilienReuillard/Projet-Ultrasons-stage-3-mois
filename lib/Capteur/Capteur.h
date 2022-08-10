@@ -18,10 +18,10 @@ class Capteur
     void MaZ(); //Mise a Zero des différentes variables
     void uploadData(int i);  //met a jours le i-ème élément de la liste vReal
 
-    /*EMISSION SALVES*/
+    /*EMISSION SALVES SIMULTANEES*/
 
-    void emissionSalveMux(int i);  //Emission en fonction de la position de i (dans le temps)
-    void emissionSalve(int i); //A utiliser dans un circuit sans MUX
+    void emissionSalveSimulMux(int i);  //Emission en fonction de la position de i (dans le temps)
+    void emissionSalveSimul(int i); //A utiliser dans un circuit sans MUX
     void deriv_list(int mode = 0); //Dérive vReal dans vReal_der
     void moyenne();
     void ech_a_zero();  //échelonne à 0 à partir de la moyenne
@@ -38,6 +38,10 @@ class Capteur
     int detectionSimple(int i); //détecte une impulsion unique
     int derivAndBinAuPas(int i); //dérive pas à pas et replis la liste binaire en fonction d'un seuil prédéfini.
     int validationBreak();  //si un signal est détecté, (this->valid) on renvoie 1, pour faire un break.
+
+    /*EMISSION SIMPLE AVEC SALVES*/
+
+    void emissionSimpleSimul(int i);  //emmet une salve lorqu'il est appelé
 
     void distance(int affiche=0);  //calcul la distance; i = 1: affiche;  i = 0: affiche pas
     void affiche(); //affiche les données essentielles

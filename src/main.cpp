@@ -85,6 +85,10 @@ void loop()
 {
   switch (detection_mode)
   {
+
+  /*---------------------------------------------------------------------------------------*/
+  /*------------------------------------------CASE 0---------------------------------------*/
+  /*---------------------------------------------------------------------------------------*/
   case 0:
     /*REMISE A ZEROS VARIABLES*/
     Cap0.MaZ();
@@ -102,13 +106,13 @@ void loop()
     {
         /*EMISSION*/
 
-        Cap0.emissionSalveMux(i);
-        Cap1.emissionSalveMux(i);
-        Cap2.emissionSalveMux(i);
-        Cap3.emissionSalveMux(i);
-        Cap4.emissionSalveMux(i);
-        Cap5.emissionSalveMux(i);
-        Cap6.emissionSalveMux(i);
+        Cap0.emissionSalveSimulMux(i);
+        Cap1.emissionSalveSimulMux(i);
+        Cap2.emissionSalveSimulMux(i);
+        Cap3.emissionSalveSimulMux(i);
+        Cap4.emissionSalveSimulMux(i);
+        Cap5.emissionSalveSimulMux(i);
+        Cap6.emissionSalveSimulMux(i);
 
         /*RECEPTION*/
         Cap0.uploadData(i);
@@ -149,6 +153,10 @@ void loop()
     delay(2000); /* Repeat after delay */
   break;
   
+  /*---------------------------------------------------------------------------------------*/
+  /*------------------------------------------CASE 1---------------------------------------*/
+  /*---------------------------------------------------------------------------------------*/
+
   case 1:
     /*REMISE A ZEROS VARIABLES*/
     Cap0.MaZ();
@@ -259,9 +267,15 @@ void loop()
     Cap4.afficheReception();
     Cap5.afficheReception();
     Cap6.afficheReception();
+  break;
 
+  /*---------------------------------------------------------------------------------------*/
+  /*------------------------------------------CASE 2---------------------------------------*/
+  /*---------------------------------------------------------------------------------------*/
+  case 2:
 
   break;
+
   }
   
 }
