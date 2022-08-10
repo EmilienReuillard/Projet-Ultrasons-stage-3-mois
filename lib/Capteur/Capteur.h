@@ -11,7 +11,7 @@ class Capteur
 {   
   public:
   
-    Capteur(int pinIn, int pinOUT, int T);
+    Capteur(int pinIn, int pinOUT, int T=0);
     ~Capteur();
 
     void defPinMod(); //pinMode(pinIN) ; pinMode(pinOUT)

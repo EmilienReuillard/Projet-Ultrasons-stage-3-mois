@@ -41,7 +41,9 @@ Capteur Cap6(InpA6,6,17);
 
 double seuil = 10000; //Arbitraire en fonction des meures testés
 int erreur = 1;  //erreur acceptable en ms
-int detection_mode = 0; //0:salves 1:emission simples
+int detection_mode = 0; 
+//0:salves 
+//1:emission simples || If this mode is enable, the periode in the declaration is useless
 
 #define SCL_INDEX 0x00
 #define SCL_TIME 0x01
