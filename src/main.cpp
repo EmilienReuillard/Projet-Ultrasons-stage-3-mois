@@ -131,13 +131,13 @@ void loop()
     
 
     /* Traitement du signal */
-    Cap0.Prorocole_detection();
-    Cap1.Prorocole_detection();
-    Cap2.Prorocole_detection();
-    Cap3.Prorocole_detection();
-    Cap4.Prorocole_detection();
-    Cap5.Prorocole_detection();
-    Cap6.Prorocole_detection();
+    Cap0.Prorocole_0();
+    Cap1.Prorocole_0();
+    Cap2.Prorocole_0();
+    Cap3.Prorocole_0();
+    Cap4.Prorocole_0();
+    Cap5.Prorocole_0();
+    Cap6.Prorocole_0();
 
     /*AFFICHAGE*/
     Cap0.afficheReception();
@@ -173,7 +173,7 @@ void loop()
     Cap0.emissionSimpleMux();
     for(int i=0; i<samples; i++)
     {
-      Cap0.Prorocole_alternance_capt(i);
+      Cap0.Prorocole_1(i);
       if( Cap0.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
@@ -186,7 +186,7 @@ void loop()
     Cap1.emissionSimpleMux();
     for(int i=0; i<samples; i++)
     {
-      Cap1.Prorocole_alternance_capt(i);
+      Cap1.Prorocole_1(i);
       if( Cap1.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
@@ -199,7 +199,7 @@ void loop()
     Cap2.emissionSimpleMux();
     for(int i=0; i<samples; i++)
     {
-      Cap2.Prorocole_alternance_capt(i);
+      Cap2.Prorocole_1(i);
       if( Cap2.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
@@ -212,7 +212,7 @@ void loop()
     Cap3.emissionSimpleMux();
     for(int i=0; i<samples; i++)
     {
-      Cap3.Prorocole_alternance_capt(i);
+      Cap3.Prorocole_1(i);
       if( Cap3.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
@@ -225,7 +225,7 @@ void loop()
     Cap4.emissionSimpleMux();
     for(int i=0; i<samples; i++)
     {
-      Cap4.Prorocole_alternance_capt(i);
+      Cap4.Prorocole_1(i);
       if( Cap4.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
@@ -238,7 +238,7 @@ void loop()
     Cap5.emissionSimpleMux();
     for(int i=0; i<samples; i++)
     {
-      Cap5.Prorocole_alternance_capt(i);
+      Cap5.Prorocole_1(i);
       if( Cap5.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop
@@ -251,7 +251,7 @@ void loop()
     Cap6.emissionSimpleMux();
     for(int i=0; i<samples; i++)
     {
-      Cap6.Prorocole_alternance_capt(i);
+      Cap6.Prorocole_1(i);
       if( Cap6.validationBreak() == 1){break;}
       while(micros() - microseconds < sampling_period_us){
           //empty loop

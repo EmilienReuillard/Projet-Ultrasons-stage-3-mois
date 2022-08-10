@@ -18,7 +18,7 @@ class Capteur
     void MaZ(); //Mise a Zero des différentes variables
     void uploadData(int i);  //met a jours le i-ème élément de la liste vReal
 
-    /*EMISSION SALVES SIMULTANEES*/
+    /*EMISSION SALVES SIMULTANEES -- CASE0*/
 
     void emissionSalveSimulMux(int i);  //Emission en fonction de la position de i (dans le temps)
     void emissionSalveSimul(int i); //A utiliser dans un circuit sans MUX
@@ -27,19 +27,19 @@ class Capteur
     void ech_a_zero();  //échelonne à 0 à partir de la moyenne
     void detection();  //renvoie un signal binaire en fonction de ce a été ou non détecté
     int valid_freq(int Nvalid = 3, int err = 1);    //Vérifie si un signal a bien été détecté
-    int Prorocole_detection();  //Regroupe les 5 fonctions précédentes
+    int Prorocole_0();  //Regroupe les 5 fonctions précédentes
 
-    /*EMISSION SIMPLES*/
+    /*EMISSION SIMPLES -- CASE1*/
 
     void emissionSimpleMux();  //Emet une fois
     void emissionSimple(int i);
-    void Prorocole_alternance_capt(int i); //programme le plus simple possible pour mesurer les distances. A utiliser avec emissionSimpleMux()
+    void Prorocole_1(int i); //programme le plus simple possible pour mesurer les distances. A utiliser avec emissionSimpleMux()
     void BreakProtocole(int i); //Sort de la boucle de mesure si on capte un truc.
     int detectionSimple(int i); //détecte une impulsion unique
     int derivAndBinAuPas(int i); //dérive pas à pas et replis la liste binaire en fonction d'un seuil prédéfini.
     int validationBreak();  //si un signal est détecté, (this->valid) on renvoie 1, pour faire un break.
 
-    /*EMISSION SIMPLE AVEC SALVES*/
+    /*EMISSION SIMPLE AVEC SALVES -- CASE2*/
 
     void emissionSimpleSimul(int i);  //emmet une salve lorqu'il est appelé
 

@@ -230,7 +230,7 @@ int Capteur::valid_freq(int Nvalid, int err){
   return 0; //si aucun signal n'a été validé, retourne 0;
 }
 
-int Capteur::Prorocole_detection(){
+int Capteur::Prorocole_0(){
   this->moyenne();
   this->ech_a_zero();
   this->deriv_list();
@@ -243,7 +243,7 @@ int Capteur::Prorocole_detection(){
 /*------------------------------------CASE 2----------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 
-void Capteur::Prorocole_alternance_capt(int i){
+void Capteur::Prorocole_1(int i){
     this->uploadData(i);
     this->derivAndBinAuPas(i);
     this->detectionSimple(i);
