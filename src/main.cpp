@@ -89,6 +89,10 @@ void loop()
   /*---------------------------------------------------------------------------------------*/
   /*------------------------------------------CASE 0---------------------------------------*/
   /*---------------------------------------------------------------------------------------*/
+  /*
+  On emet des salves dès l'instant t0. On mesure tout en même temps, et on fait les verifications à la fin
+  Puis on affiche les résultats.
+  */
   case 0:
     /*REMISE A ZEROS VARIABLES*/
     Cap0.MaZ();
@@ -156,6 +160,11 @@ void loop()
   /*---------------------------------------------------------------------------------------*/
   /*------------------------------------------CASE 1---------------------------------------*/
   /*---------------------------------------------------------------------------------------*/
+  /*
+  On emet un blip et on regarde le temps qu'il met a revenir. Si on capte un truc, return 1.
+  Pas de vérification
+  */
+
 
   case 1:
     /*REMISE A ZEROS VARIABLES*/
@@ -272,6 +281,13 @@ void loop()
   /*---------------------------------------------------------------------------------------*/
   /*------------------------------------------CASE 2---------------------------------------*/
   /*---------------------------------------------------------------------------------------*/
+  /*
+  Cette partie emet une salve, reçoit et calcule, puis fait un traitement des données pour voir si la fréquence est validée
+  Et on fait ça avec chaque capteur.
+  C'est le CASE avec plus de vérification en somme. Un mix entre CASE0 et CASE1
+  */
+
+
   case 2:
     /*REMISE A ZEROS VARIABLES*/
     Cap0.MaZ();
