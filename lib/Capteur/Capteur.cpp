@@ -37,7 +37,7 @@ void Capteur::MaZ(){
 /*------------------------------------CASE 0----------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 
-void Capteur::emissionSalveSimulMux(int i){
+void Capteur::emissionSalveMux(int i){
   //Pins du mux en entrée// 1: car OUT bare
   int S0 = 0; 
   int S1 = 0;
@@ -125,7 +125,7 @@ void Capteur::uploadData(int i){
     sum += vReal[i];    //On en profite pour additionner toutes les val de la liste au fur et a mesure pour économiser une boucle plus tard
 }
 
-void Capteur::deriv_list(int mode){
+void Capteur::real2der(int mode){
     /* Periode */
     float T = 1.0/samplingFrequency;
 
@@ -174,12 +174,12 @@ void Capteur::ech_a_zero(){
 
 
 //Prend la liste dérivée, et renvoie une liste bianaire
-void Capteur::detection(){
+void Capteur::der2bin(){
     double somme = 0; //somme pour le calcul de la moyenne de la list dérivée sans 0
     int Nb = 0;       //Nb le valeurs dfférentes de 0
     double moy_sans_zero = 0;
     for(int i; i < samples; i++){
-        if(vReal_der[i] > 0){
+        if(vReal_der[i] > 0){   //on ne garde que les valeures positives pour détecter uniquement les fronts montants
         somme += vReal_der[i];
         Nb++;
         }
@@ -237,8 +237,8 @@ int Capteur::valid_freq(int Nvalid, int err){
 int Capteur::Prorocole_0(){
   this->moyenne();
   this->ech_a_zero();
-  this->deriv_list();
-  this->detection();
+  this->real2der();
+  this->der2bin();
   this->valid_freq(3,1);
 }
 
@@ -254,7 +254,7 @@ void Capteur::Prorocole_1(int i){
     this->distance();
 }
 
-void Capteur::emissionSimpleMux(){
+void Capteur::emissionSimpleMux(int i){
   //Pins du mux en entrée// 1: car OUT bare
   int S0 = 0; 
   int S1 = 0;
@@ -304,7 +304,7 @@ void Capteur::emissionSimpleMux(){
   digitalWrite(5,S3);
   
   if(lock_first_em == 0){
-    first_em = 0;  //en ms// On considère l'émission comme le début du timing
+    first_em = i*1000*(1.0/samplingFrequency);  //en ms
     first_em_real_time = micros();  //mise en mémoire du temps réel
     lock_first_em = 1;
   }
@@ -366,8 +366,8 @@ int Capteur::validationBreak(){
 void Capteur::Prorocole_2(){
   this->moyenne();
   this->ech_a_zero();
-  this->deriv_list();
-  this->detection();
+  this->real2der();
+  this->der2bin();
   this->valid_freq(3,1);
 }
 
@@ -379,8 +379,8 @@ void Capteur::Prorocole_2(){
 void Capteur::Prorocole_3(){
   this->moyenne();
   this->ech_a_zero();
-  this->deriv_list();
-  this->detection();
+  this->real2der();
+  this->der2bin();
   this->detectionSimple_3();
 }
 
