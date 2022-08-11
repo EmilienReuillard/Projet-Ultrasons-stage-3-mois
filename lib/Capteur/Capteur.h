@@ -28,8 +28,8 @@ class Capteur
     void emissionSalveMux(int i);       //Emission en fonction de la position de i (dans le temps)
     void emissionSalve(int i);          //A utiliser dans un circuit sans MUX
 
-    void emissionSimpleMux(int i = 0);  //Emet une fois
-    void emissionSimple(int i);
+    void emissionSimpleMux(int i = 0);  //Emet une fois// On met i=0 par defaut, car il emmet juste avant que l'on lance la captation du son. 
+    void emissionSimple(int i = 0);
 
     /*DETECTION D'ONDES*/
     int  detectionSimple(int i); //détecte une impulsion unique

@@ -104,7 +104,6 @@ void loop()
     Cap5.MaZ();
     Cap6.MaZ();
     
-    
     /*SAMPLING*/
     microseconds = micros();
     for(int i=0; i<samples; i++)
@@ -134,7 +133,6 @@ void loop()
         microseconds += sampling_period_us;
     }
     
-
     /* Traitement du signal */
     Cap0.Prorocole_0();
     Cap1.Prorocole_0();
@@ -157,9 +155,79 @@ void loop()
     //while(1);
     delay(2000); /* Repeat after delay */
   break;
-  
+
   /*---------------------------------------------------------------------------------------*/
   /*------------------------------------------CASE 1---------------------------------------*/
+  /*---------------------------------------------------------------------------------------*/
+  /*
+  On emet des ondes uniques dès l'instant t0. On mesure tout en même temps, et on fait les verifications à la fin
+  Puis on affiche les résultats.
+  */
+  case 1:
+    /*REMISE A ZEROS VARIABLES*/
+    Cap0.MaZ();
+    Cap1.MaZ();
+    Cap2.MaZ();
+    Cap3.MaZ();
+    Cap4.MaZ();
+    Cap5.MaZ();
+    Cap6.MaZ();
+    
+    /*EMISSION*/
+
+    Cap0.emissionSimple();
+    Cap1.emissionSimple();
+    Cap2.emissionSimple();
+    Cap3.emissionSimple();
+    Cap4.emissionSimple();
+    Cap5.emissionSimple();
+    Cap6.emissionSimple();
+
+    /*SAMPLING*/
+    microseconds = micros();
+    for(int i=0; i<samples; i++)
+    {
+        /*RECEPTION*/
+        Cap0.uploadData(i);
+        Cap1.uploadData(i);
+        Cap2.uploadData(i);
+        Cap3.uploadData(i);
+        Cap4.uploadData(i);
+        Cap5.uploadData(i);
+        Cap6.uploadData(i);
+        
+        while(micros() - microseconds < sampling_period_us){
+          //empty loop
+        }
+        microseconds += sampling_period_us;
+    }
+
+    /* Traitement du signal */
+    Cap0.Prorocole_3();
+    Cap1.Prorocole_3();
+    Cap2.Prorocole_3();
+    Cap3.Prorocole_3();
+    Cap4.Prorocole_3();
+    Cap5.Prorocole_3();
+    Cap6.Prorocole_3();
+
+    /*AFFICHAGE*/
+    Cap0.afficheReception();
+    Cap1.afficheReception();
+    Cap2.afficheReception();
+    Cap3.afficheReception();
+    Cap4.afficheReception();
+    Cap5.afficheReception();
+    Cap6.afficheReception();
+
+    /* DELAY */
+    //while(1);
+    delay(2000); /* Repeat after delay */
+  break;
+
+  
+  /*---------------------------------------------------------------------------------------*/
+  /*------------------------------------------CASE 2---------------------------------------*/
   /*---------------------------------------------------------------------------------------*/
   /*
   On emet un blip et on regarde le temps qu'il met a revenir. Si on capte un truc, return 1.
@@ -167,7 +235,7 @@ void loop()
   */
 
 
-  case 1:
+  case 2:
     /*REMISE A ZEROS VARIABLES*/
     Cap0.MaZ();
     Cap1.MaZ();
@@ -280,7 +348,7 @@ void loop()
   break;
 
   /*---------------------------------------------------------------------------------------*/
-  /*------------------------------------------CASE 2---------------------------------------*/
+  /*------------------------------------------CASE 3---------------------------------------*/
   /*---------------------------------------------------------------------------------------*/
   /*
   Cette partie emet une salve, reçoit et calcule, puis fait un traitement des données pour voir si la fréquence est validée
@@ -289,7 +357,7 @@ void loop()
   */
 
 
-  case 2:
+  case 3:
     /*REMISE A ZEROS VARIABLES*/
     Cap0.MaZ();
     Cap1.MaZ();
@@ -431,77 +499,6 @@ void loop()
 
     /*Affichage*/
     Cap6.afficheReception();
-  break;
-
-  /*---------------------------------------------------------------------------------------*/
-  /*------------------------------------------CASE 3---------------------------------------*/
-  /*---------------------------------------------------------------------------------------*/
-  /*
-  On emet des ondes uniques dès l'instant t0. On mesure tout en même temps, et on fait les verifications à la fin
-  Puis on affiche les résultats.
-  */
-  case 3:
-    /*REMISE A ZEROS VARIABLES*/
-    Cap0.MaZ();
-    Cap1.MaZ();
-    Cap2.MaZ();
-    Cap3.MaZ();
-    Cap4.MaZ();
-    Cap5.MaZ();
-    Cap6.MaZ();
-    
-    
-    /*SAMPLING*/
-    microseconds = micros();
-    for(int i=0; i<samples; i++)
-    {
-        /*EMISSION*/
-
-        Cap0.emissionSimple(i);
-        Cap1.emissionSimple(i);
-        Cap2.emissionSimple(i);
-        Cap3.emissionSimple(i);
-        Cap4.emissionSimple(i);
-        Cap5.emissionSimple(i);
-        Cap6.emissionSimple(i);
-
-        /*RECEPTION*/
-        Cap0.uploadData(i);
-        Cap1.uploadData(i);
-        Cap2.uploadData(i);
-        Cap3.uploadData(i);
-        Cap4.uploadData(i);
-        Cap5.uploadData(i);
-        Cap6.uploadData(i);
-        
-        while(micros() - microseconds < sampling_period_us){
-          //empty loop
-        }
-        microseconds += sampling_period_us;
-    }
-    
-
-    /* Traitement du signal */
-    Cap0.Prorocole_3();
-    Cap1.Prorocole_3();
-    Cap2.Prorocole_3();
-    Cap3.Prorocole_3();
-    Cap4.Prorocole_3();
-    Cap5.Prorocole_3();
-    Cap6.Prorocole_3();
-
-    /*AFFICHAGE*/
-    Cap0.afficheReception();
-    Cap1.afficheReception();
-    Cap2.afficheReception();
-    Cap3.afficheReception();
-    Cap4.afficheReception();
-    Cap5.afficheReception();
-    Cap6.afficheReception();
-
-    /* DELAY */
-    //while(1);
-    delay(2000); /* Repeat after delay */
   break;
 
   }
