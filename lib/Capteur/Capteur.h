@@ -11,7 +11,7 @@ class Capteur
 {   
   public:
   
-    Capteur(int pinIn, int pinOUT, int T=0);
+    Capteur(int pinIn, int pinOUTA, int pinOUTB, int T=0);
     ~Capteur();
     void defPinMod(); //pinMode(pinIN) ; pinMode(pinOUT)
     
@@ -64,8 +64,9 @@ class Capteur
     int T = 0;  //ms
 
     /* PINS */
-    int pinIn;  //Réception
-    int pinOUT; //Emission
+    int pinIn;    //Réception
+    int pinOUTA;  //Emission sur A
+    int pinOUTB;  //Emission sur B
 
     /* ARRAY */
     double vReal[samples];      //Données Brutes

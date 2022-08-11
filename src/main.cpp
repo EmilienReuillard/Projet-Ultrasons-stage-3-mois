@@ -29,13 +29,13 @@ unsigned long microseconds;
 /*DECLARATION DES CAPTEURS ---------------------------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 
-Capteur Cap0(InpA0,0,5);
-Capteur Cap1(InpA1,1,7);
-Capteur Cap2(InpA2,2,9);
-Capteur Cap3(InpA3,3,11);
-Capteur Cap4(InpA4,4,13);
-Capteur Cap5(InpA5,5,15);
-Capteur Cap6(InpA6,6,17);
+Capteur Cap0(InpA6,0,1,5);
+Capteur Cap1(InpA5,2,3,7);
+Capteur Cap2(InpA4,4,5,9);
+Capteur Cap3(InpA3,6,7,11);
+Capteur Cap4(InpA2,8,9,13);
+Capteur Cap5(InpA1,10,11,15);
+Capteur Cap6(InpA0,12,13,17);
 
 /*----------------------------------------------------------------------------------*/
 

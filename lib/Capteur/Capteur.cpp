@@ -1,9 +1,10 @@
 #include <capteur.h>
 #include <Fonctions.h>
 
-Capteur::Capteur(int pinIn_, int pinOUT_, int T_){
+Capteur::Capteur(int pinIn_, int pinOUTA_, int pinOUTB_, int T_){
   this->pinIn = pinIn_;
-  this->pinOUT = pinOUT_;
+  this->pinOUTA = pinOUTA_;
+  this->pinOUTB = pinOUTB_;
   this->T = T_;
 
   N_capt = N_capt_tot;
@@ -45,7 +46,7 @@ void Capteur::emissionSalveMux(int i){
   int S3 = 0;
 
   //Capteur sur lequel on veut émettre; ATTENTION, ce n'est le choix de la pin de sortie!
-  switch (this->pinOUT)
+  switch (this->pinOUTA)
   {
     case 0:
       S0 = LOW; S1 = LOW;   S2 = LOW;   S3 = LOW;      
@@ -108,13 +109,13 @@ void Capteur::emissionSalveMux(int i){
 void Capteur::emissionSalve(int i){
   //si bon timing émission
   if(T * (int)compt == i*((int)samplingFrequency/1000) && (int)compt < N_em){ //(freq/1000) si on doit augmanter la fréquence.
-    digitalWrite(pinOUT,HIGH);
+    digitalWrite(pinOUTA,HIGH);
     if(lock_first_em == 0){
       first_em = i*1000*(1.0/samplingFrequency);  //en ms
       first_em_real_time = micros();
       lock_first_em = 1;
     }
-    digitalWrite(pinOUT,LOW);
+    digitalWrite(pinOUTA,LOW);
     compt++;
   }
 }
@@ -262,7 +263,7 @@ void Capteur::emissionSimpleMux(int i){
   int S3 = 0;
 
   //Capteur sur lequel on veut émettre; ATTENTION, ce n'est le choix de la pin de sortie!
-  switch (this->pinOUT)
+  switch (this->pinOUTA)
   {
     case 0:
       S0 = LOW; S1 = LOW;   S2 = LOW;   S3 = LOW;      
@@ -317,10 +318,10 @@ void Capteur::emissionSimpleMux(int i){
 
 void Capteur::emissionSimple(int i){
   //si bon timing émission
-  digitalWrite(pinOUT,HIGH);
+  digitalWrite(pinOUTA,HIGH);
   first_em_real_time = micros();
   first_em = i*1000*(1.0/samplingFrequency);  //en ms
-  digitalWrite(pinOUT,LOW);
+  digitalWrite(pinOUTA,LOW);
   }
 
 int Capteur::derivAndBinAuPas(int i){
