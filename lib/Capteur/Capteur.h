@@ -43,6 +43,11 @@ class Capteur
 
     void Prorocole_2();
 
+    /*EMISSION SIMULTANEES SANS SALVES -- CASE3*/
+
+    void Prorocole_3();
+    void detectionSimple_3();
+
     /*DISTANCE*/
     void distance(int affiche=0);  //calcul la distance; i = 1: affiche;  i = 0: affiche pas
 

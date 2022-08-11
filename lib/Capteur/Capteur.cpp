@@ -172,6 +172,8 @@ void Capteur::ech_a_zero(){
 
 }
 
+
+//Prend la liste dérivée, et renvoie une liste bianaire
 void Capteur::detection(){
     double somme = 0; //somme pour le calcul de la moyenne de la list dérivée sans 0
     int Nb = 0;       //Nb le valeurs dfférentes de 0
@@ -369,6 +371,29 @@ void Capteur::Prorocole_2(){
   this->valid_freq(3,1);
 }
 
+/*----------------------------------------------------------------------------------*/
+/*------------------------------------CASE 3----------------------------------------*/
+/*----------------------------------------------------------------------------------*/
+
+//on fait le même travail que lors d'une emission par salve simultané sauf que l'on recherche uniquement une seul impultion.
+void Capteur::Prorocole_3(){
+  this->moyenne();
+  this->ech_a_zero();
+  this->deriv_list();
+  this->detection();
+  this->detectionSimple_3();
+}
+
+void Capteur::detectionSimple_3(){
+  for(int i = 0; i < samples ; i++){
+    if(lock_first_re == 0 && vReal_bin[i] == 1){
+      first_re = i;
+      first_em_real_time = micros();
+      valid = 1;
+      lock_first_re = 1;
+    }
+  }
+}
 
 /*----------------------------------------------------------------------------------*/
 /*------------------------------------OTHERS----------------------------------------*/
