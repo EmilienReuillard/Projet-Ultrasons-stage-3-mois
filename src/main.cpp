@@ -86,7 +86,6 @@ void loop()
 {
   switch (detection_mode)
   {
-
   /*---------------------------------------------------------------------------------------*/
   /*------------------------------------------CASE 0---------------------------------------*/
   /*---------------------------------------------------------------------------------------*/
@@ -230,134 +229,13 @@ void loop()
   /*------------------------------------------CASE 2---------------------------------------*/
   /*---------------------------------------------------------------------------------------*/
   /*
-  On emet un blip et on regarde le temps qu'il met a revenir. Si on capte un truc, return 1.
-  Pas de vérification
-  */
-
-
-  case 2:
-    /*REMISE A ZEROS VARIABLES*/
-    Cap0.MaZ();
-    Cap1.MaZ();
-    Cap2.MaZ();
-    Cap3.MaZ();
-    Cap4.MaZ();
-    Cap5.MaZ();
-    Cap6.MaZ();
-
-    //Avec les parametres par defaut, une boucle met à peu près 0.2s a se faire si rien n'est capté
-    /*Cap0*/
-    microseconds = micros();
-    Cap0.emissionSimpleMux();
-    for(int i=0; i<samples; i++)
-    {
-      Cap0.Prorocole_1(i);
-      if( Cap0.validationBreak() == 1){break;}
-      while(micros() - microseconds < sampling_period_us){
-          //empty loop
-      }
-      microseconds += sampling_period_us;
-    }
-
-    /*Cap1*/
-    microseconds = micros();
-    Cap1.emissionSimpleMux();
-    for(int i=0; i<samples; i++)
-    {
-      Cap1.Prorocole_1(i);
-      if( Cap1.validationBreak() == 1){break;}
-      while(micros() - microseconds < sampling_period_us){
-          //empty loop
-      }
-      microseconds += sampling_period_us;
-    }
-
-    /*Cap2*/
-    microseconds = micros();
-    Cap2.emissionSimpleMux();
-    for(int i=0; i<samples; i++)
-    {
-      Cap2.Prorocole_1(i);
-      if( Cap2.validationBreak() == 1){break;}
-      while(micros() - microseconds < sampling_period_us){
-          //empty loop
-      }
-      microseconds += sampling_period_us;
-    }
-
-    /*Cap3*/
-    microseconds = micros();
-    Cap3.emissionSimpleMux();
-    for(int i=0; i<samples; i++)
-    {
-      Cap3.Prorocole_1(i);
-      if( Cap3.validationBreak() == 1){break;}
-      while(micros() - microseconds < sampling_period_us){
-          //empty loop
-      }
-      microseconds += sampling_period_us;
-    }
-
-    /*Cap4*/
-    microseconds = micros();
-    Cap4.emissionSimpleMux();
-    for(int i=0; i<samples; i++)
-    {
-      Cap4.Prorocole_1(i);
-      if( Cap4.validationBreak() == 1){break;}
-      while(micros() - microseconds < sampling_period_us){
-          //empty loop
-      }
-      microseconds += sampling_period_us;
-    }
-
-    /*Cap5*/
-    microseconds = micros();
-    Cap5.emissionSimpleMux();
-    for(int i=0; i<samples; i++)
-    {
-      Cap5.Prorocole_1(i);
-      if( Cap5.validationBreak() == 1){break;}
-      while(micros() - microseconds < sampling_period_us){
-          //empty loop
-      }
-      microseconds += sampling_period_us;
-    }
-
-    /*Cap6*/
-    microseconds = micros();
-    Cap6.emissionSimpleMux();
-    for(int i=0; i<samples; i++)
-    {
-      Cap6.Prorocole_1(i);
-      if( Cap6.validationBreak() == 1){break;}
-      while(micros() - microseconds < sampling_period_us){
-          //empty loop
-      }
-      microseconds += sampling_period_us;
-    }
-
-    /*AFFICHAGE*/
-    Cap0.afficheReception();
-    Cap1.afficheReception();
-    Cap2.afficheReception();
-    Cap3.afficheReception();
-    Cap4.afficheReception();
-    Cap5.afficheReception();
-    Cap6.afficheReception();
-  break;
-
-  /*---------------------------------------------------------------------------------------*/
-  /*------------------------------------------CASE 3---------------------------------------*/
-  /*---------------------------------------------------------------------------------------*/
-  /*
   Cette partie emet une salve, reçoit et calcule, puis fait un traitement des données pour voir si la fréquence est validée
   Et on fait ça avec chaque capteur.
   C'est le CASE avec plus de vérification en somme. Un mix entre CASE0 et CASE1
   */
 
 
-  case 3:
+  case 2:
     /*REMISE A ZEROS VARIABLES*/
     Cap0.MaZ();
     Cap1.MaZ();
@@ -498,6 +376,127 @@ void loop()
     Cap6.Prorocole_2();
 
     /*Affichage*/
+    Cap6.afficheReception();
+  break;
+
+
+  /*---------------------------------------------------------------------------------------*/
+  /*------------------------------------------CASE 3---------------------------------------*/
+  /*---------------------------------------------------------------------------------------*/
+  /*
+  On emet un blip et on regarde le temps qu'il met a revenir. Si on capte un truc, return 1.
+  Pas de vérification
+  */
+
+  case 3:
+    /*REMISE A ZEROS VARIABLES*/
+    Cap0.MaZ();
+    Cap1.MaZ();
+    Cap2.MaZ();
+    Cap3.MaZ();
+    Cap4.MaZ();
+    Cap5.MaZ();
+    Cap6.MaZ();
+
+    //Avec les parametres par defaut, une boucle met à peu près 0.2s a se faire si rien n'est capté
+    /*Cap0*/
+    microseconds = micros();
+    Cap0.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap0.Prorocole_1(i);
+      if( Cap0.validationBreak() == 1){break;}
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap1*/
+    microseconds = micros();
+    Cap1.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap1.Prorocole_1(i);
+      if( Cap1.validationBreak() == 1){break;}
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap2*/
+    microseconds = micros();
+    Cap2.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap2.Prorocole_1(i);
+      if( Cap2.validationBreak() == 1){break;}
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap3*/
+    microseconds = micros();
+    Cap3.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap3.Prorocole_1(i);
+      if( Cap3.validationBreak() == 1){break;}
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap4*/
+    microseconds = micros();
+    Cap4.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap4.Prorocole_1(i);
+      if( Cap4.validationBreak() == 1){break;}
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap5*/
+    microseconds = micros();
+    Cap5.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap5.Prorocole_1(i);
+      if( Cap5.validationBreak() == 1){break;}
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*Cap6*/
+    microseconds = micros();
+    Cap6.emissionSimpleMux();
+    for(int i=0; i<samples; i++)
+    {
+      Cap6.Prorocole_1(i);
+      if( Cap6.validationBreak() == 1){break;}
+      while(micros() - microseconds < sampling_period_us){
+          //empty loop
+      }
+      microseconds += sampling_period_us;
+    }
+
+    /*AFFICHAGE*/
+    Cap0.afficheReception();
+    Cap1.afficheReception();
+    Cap2.afficheReception();
+    Cap3.afficheReception();
+    Cap4.afficheReception();
+    Cap5.afficheReception();
     Cap6.afficheReception();
   break;
 
