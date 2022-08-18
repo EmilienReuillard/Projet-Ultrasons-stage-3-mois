@@ -33,9 +33,9 @@ Capteur Cap0(InpA6,0,1,5,0);
 Capteur Cap1(InpA5,2,3,7,1);
 Capteur Cap2(InpA4,4,5,9,2);
 Capteur Cap3(InpA3,6,7,11,3);
-Capteur Cap4(InpA2,8,9,13,4);
+Capteur Cap4(InpA0,8,9,13,4);
 Capteur Cap5(InpA1,10,11,15,5);
-Capteur Cap6(InpA0,12,13,17,6);
+Capteur Cap6(InpA2,12,13,17,6);
 
 /*----------------------------------------------------------------------------------*/
 
@@ -144,6 +144,7 @@ void loop()
     Cap6.Prorocole_0();
 
     /*AFFICHAGE*/
+    
     Cap0.afficheReception();
     Cap1.afficheReception();
     Cap2.afficheReception();
@@ -151,6 +152,9 @@ void loop()
     Cap4.afficheReception();
     Cap5.afficheReception();
     Cap6.afficheReception();
+    
+
+    //Cap0.affiche();
 
     Serial.println("===================================\n");
 
@@ -222,6 +226,8 @@ void loop()
     Cap4.afficheReception();
     Cap5.afficheReception();
     Cap6.afficheReception();
+    Serial.println("===================================\n");
+
 
     /* DELAY */
     //while(1);
@@ -380,6 +386,9 @@ void loop()
 
     /*Affichage*/
     Cap6.afficheReception();
+
+    Serial.println("===================================\n");
+
   break;
 
 
@@ -501,6 +510,10 @@ void loop()
     Cap4.afficheReception();
     Cap5.afficheReception();
     Cap6.afficheReception();
+
+    Serial.println("===================================\n");
+
+
   break;
 
   }

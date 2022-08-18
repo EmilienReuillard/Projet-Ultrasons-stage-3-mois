@@ -28,6 +28,8 @@ void Capteur::MaZ(){
     this->dist = 0;             //distance
     this->dist_real_time = 0;
     this->valid = 0;
+    this->sum = 0;
+    this->moy_sans_zero = 0;
     /*
     delete[] vReal;    
     delete[] vReal_ech;
@@ -181,15 +183,14 @@ void Capteur::ech_a_zero(){
 void Capteur::der2bin(){
     double somme = 0; //somme pour le calcul de la moyenne de la list dérivée sans 0
     int Nb = 0;       //Nb le valeurs dfférentes de 0
-    double moy_sans_zero = 0;
     for(int i = 0; i < samples; i++){
         if(vReal_der[i] > 0){   //on ne garde que les valeures positives pour détecter uniquement les fronts montants
         somme += vReal_der[i];
         Nb++;
         }
     }
-    moy_sans_zero = somme/Nb;
-    for(int i = 0; i < Nb; i++){
+    this->moy_sans_zero = somme/Nb;
+    for(int i = 0; i < samples; i++){
         if(vReal_der[i] > moy_sans_zero){
         vReal_bin[i] = 1;
         }
@@ -203,8 +204,8 @@ void Capteur::der2bin(){
 //recherche aussi la première réception validée
 int Capteur::valid_freq(int Nvalid, int err){
 
-    double T1 = (1/samplingFrequency)*1000; //pour 1000Hz, T=1
-    int delta = this->T/T1; //Serial.print("delta:"); Serial.println(delta);    //delta: nb de pas recherché entre 2 impultions
+    double T1 = (1.0/samplingFrequency)*1000; //pour 1000Hz, T=1
+    this->delta = this->T/T1; //Serial.print("delta:"); Serial.println(delta);    //delta: nb de pas recherché entre 2 impultions
     int compteur = 0; //compteur de validation
     this->lock_first_re = 0;
   
@@ -213,23 +214,27 @@ int Capteur::valid_freq(int Nvalid, int err){
       
       if(lock_first_re == 0){ //mise en mémoire 1ere réception
         this->first_re = i*1000*(1.0/samplingFrequency);  //en ms
+        this->first_re_real_time = micros();
         this->lock_first_re = 1;
       }
       
       for(int j = 0; j < Nvalid; j++){
         if(i + j*delta >= samples){return 0;}
         
-        if(vReal_bin[i + j*delta] == 1 || vReal_bin[i + j*delta - err] == 1){
+        if((vReal_bin[i + j*delta] == 1 || vReal_bin[i + j*delta - err] == 1)&&(vReal_der[i]>1001)){  //Seconde condition pour contrer le bruit blanc
           compteur++;
         }
       }
+      
       if(compteur >= Nvalid){ //signal validé
         this->valid = 1;
+        //Serial.print("first reception : ");Serial.println(this->first_re);
         return 1;
       }
       else{ //signal non validé
         this->first_re = 0;  //en ms
         this->lock_first_re = 0;
+        this->first_re_real_time = 0;
         compteur = 0;
       }
     }
@@ -419,11 +424,20 @@ void Capteur::distance(int affiche){
 void Capteur::afficheReception(){
   Serial.print("Capt");Serial.print(this->N_capt);Serial.print(" ; ");
   Serial.print("Valid = ");Serial.print(this->valid);Serial.print(" ; ");
-  Serial.print("D = ");Serial.println(this->dist);
+  Serial.print("D = ");Serial.print(this->dist);Serial.print(" ; ");
+  Serial.print("Ms0 = ");Serial.println(this->moy_sans_zero);
 }
 
 void Capteur::affiche(){
-  Serial.println("Data:\n");
+  Serial.print("\nmoy: "); 
+  Serial.println(moy);
+  Serial.print("\nMoySans0: ");
+  Serial.println(this->moy_sans_zero);
+  Serial.print("valid: ");
+  Serial.println(this->valid);
+  Serial.print("Delta: ");
+  Serial.println(this->delta);
+  Serial.println("\nData:\n");
   affiche_list(vReal);
   Serial.println("\nEchelonné:\n");
   affiche_list(vReal_ech);
@@ -431,8 +445,7 @@ void Capteur::affiche(){
   affiche_list(vReal_der);
   Serial.println("\nlist_binaire:\n");
   affiche_list(vReal_bin);
-  Serial.println("\nmoy:\n"); 
-  Serial.println(moy);
-  Serial.print("\nvalid:\n");
-  Serial.println(valid);Serial.println();
+
+  Serial.print("\nvalid: ");
+  Serial.println(this->valid);
 }

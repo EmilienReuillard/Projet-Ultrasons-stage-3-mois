@@ -20,7 +20,7 @@ class Capteur
     void uploadData(int i);           //met a jours le i-ème élément de la liste vReal
     void real2der(int mode = 0);      //Dérive vReal dans vReal_der
     void der2bin();                   //renvoie un signal binaire en fonction de ce a été ou non détecté à partir de la liste dérivée
-    int  valid_freq(int Nvalid = 3, int err = 1);    //Vérifie si un signal a bien été détecté à la fréquence voulue
+    int  valid_freq(int Nvalid = 4, int err = 1);    //Vérifie si un signal a bien été détecté à la fréquence voulue
     void ech_a_zero();                //échelonne à 0 à partir de la moyenne définie au bréalable
     void moyenne();                   //fait la moyenne à partir de sum (généré dans uploadData)
 
@@ -62,6 +62,7 @@ class Capteur
 
     /* PERIODE */
     int T = 0;  //ms
+    int delta = 0; //nombre de pas entre 2 impulsions
 
     /* PINS */
     int pinIn;    //Réception
@@ -91,6 +92,7 @@ class Capteur
     /* Moyennes */
     double sum = 0; //somme de toutes les données d'une liste pour faire la moyenne après
     double moy = 0; //moyenne
+    double moy_sans_zero = 0;
 
     /* Validation de la détection du signal*/
     int valid = 0;
