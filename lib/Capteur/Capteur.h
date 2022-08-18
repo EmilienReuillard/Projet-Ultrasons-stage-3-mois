@@ -11,7 +11,7 @@ class Capteur
 {   
   public:
   
-    Capteur(int pinIn, int pinOUTA, int pinOUTB, int T=0);
+    Capteur(int pinIn, int pinOUTA, int pinOUTB, int T = 0 , int N_capt=0);
     ~Capteur();
     void defPinMod(); //pinMode(pinIN) ; pinMode(pinOUT)
     
@@ -95,9 +95,6 @@ class Capteur
     /* Validation de la détection du signal*/
     int valid = 0;
     int seuil = 5000; //seuil de détection dérivée pour Detection simple
-
-    /* Emission */
-    int compt = 0;  //compte de nombre de plip qui ont été émis
 
     /* Distances */
     double dist = 0;  //distance

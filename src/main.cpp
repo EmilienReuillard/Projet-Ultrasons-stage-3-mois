@@ -29,13 +29,13 @@ unsigned long microseconds;
 /*DECLARATION DES CAPTEURS ---------------------------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 
-Capteur Cap0(InpA6,0,1,5);
-Capteur Cap1(InpA5,2,3,7);
-Capteur Cap2(InpA4,4,5,9);
-Capteur Cap3(InpA3,6,7,11);
-Capteur Cap4(InpA2,8,9,13);
-Capteur Cap5(InpA1,10,11,15);
-Capteur Cap6(InpA0,12,13,17);
+Capteur Cap0(InpA6,0,1,5,0);
+Capteur Cap1(InpA5,2,3,7,1);
+Capteur Cap2(InpA4,4,5,9,2);
+Capteur Cap3(InpA3,6,7,11,3);
+Capteur Cap4(InpA2,8,9,13,4);
+Capteur Cap5(InpA1,10,11,15,5);
+Capteur Cap6(InpA0,12,13,17,6);
 
 /*----------------------------------------------------------------------------------*/
 
@@ -67,15 +67,17 @@ void setup()
   Cap6.defPinMod();
   
   //Emission
-  defPinModMux(2,3,4,5);
+  //defPinModMux(2,3,4,5);
 
   //Gestion fréquence
   sampling_period_us = round(1000000*(1.0/samplingFrequency));
 
   //Serial
   Serial.begin(115200);
+  //Serial.begin(115200);
   while(!Serial);
   Serial.println("Ready");
+  delay(2000);
 }
 
 /*---------------------------------------------------------------------------------------*/
@@ -149,6 +151,8 @@ void loop()
     Cap4.afficheReception();
     Cap5.afficheReception();
     Cap6.afficheReception();
+
+    Serial.println("===================================\n");
 
     /* DELAY */
     //while(1);
@@ -233,7 +237,6 @@ void loop()
   Et on fait ça avec chaque capteur.
   C'est le CASE avec plus de vérification en somme. Un mix entre CASE0 et CASE1
   */
-
 
   case 2:
     /*REMISE A ZEROS VARIABLES*/
@@ -401,7 +404,7 @@ void loop()
     //Avec les parametres par defaut, une boucle met à peu près 0.2s a se faire si rien n'est capté
     /*Cap0*/
     microseconds = micros();
-    Cap0.emissionSimpleMux();
+    Cap0.emissionSimple();
     for(int i=0; i<samples; i++)
     {
       Cap0.Prorocole_1(i);
@@ -414,7 +417,7 @@ void loop()
 
     /*Cap1*/
     microseconds = micros();
-    Cap1.emissionSimpleMux();
+    Cap1.emissionSimple();
     for(int i=0; i<samples; i++)
     {
       Cap1.Prorocole_1(i);
@@ -427,7 +430,7 @@ void loop()
 
     /*Cap2*/
     microseconds = micros();
-    Cap2.emissionSimpleMux();
+    Cap2.emissionSimple();
     for(int i=0; i<samples; i++)
     {
       Cap2.Prorocole_1(i);
@@ -440,7 +443,7 @@ void loop()
 
     /*Cap3*/
     microseconds = micros();
-    Cap3.emissionSimpleMux();
+    Cap3.emissionSimple();
     for(int i=0; i<samples; i++)
     {
       Cap3.Prorocole_1(i);
@@ -453,7 +456,7 @@ void loop()
 
     /*Cap4*/
     microseconds = micros();
-    Cap4.emissionSimpleMux();
+    Cap4.emissionSimple();
     for(int i=0; i<samples; i++)
     {
       Cap4.Prorocole_1(i);
@@ -466,7 +469,7 @@ void loop()
 
     /*Cap5*/
     microseconds = micros();
-    Cap5.emissionSimpleMux();
+    Cap5.emissionSimple();
     for(int i=0; i<samples; i++)
     {
       Cap5.Prorocole_1(i);
@@ -479,7 +482,7 @@ void loop()
 
     /*Cap6*/
     microseconds = micros();
-    Cap6.emissionSimpleMux();
+    Cap6.emissionSimple();
     for(int i=0; i<samples; i++)
     {
       Cap6.Prorocole_1(i);

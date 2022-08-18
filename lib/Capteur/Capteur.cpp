@@ -1,14 +1,16 @@
 #include <capteur.h>
 #include <Fonctions.h>
 
-Capteur::Capteur(int pinIn_, int pinOUTA_, int pinOUTB_, int T_){
+Capteur::Capteur(int pinIn_, int pinOUTA_, int pinOUTB_, int T_,int N_capt_){
   this->pinIn = pinIn_;
   this->pinOUTA = pinOUTA_;
   this->pinOUTB = pinOUTB_;
   this->T = T_;
+  this->N_capt = N_capt_;
+}
 
-  N_capt = N_capt_tot;
-  N_capt_tot++;
+Capteur::~Capteur(){
+
 }
 
 void Capteur::defPinMod(){
@@ -26,12 +28,13 @@ void Capteur::MaZ(){
     this->dist = 0;             //distance
     this->dist_real_time = 0;
     this->valid = 0;
-
+    /*
     delete[] vReal;    
     delete[] vReal_ech;
     delete[] vReal_der;
     delete[] vReal_bin;
-    delete[] vImag;    
+    delete[] vImag; 
+    */   
 }
 
 /*----------------------------------------------------------------------------------*/
@@ -179,14 +182,14 @@ void Capteur::der2bin(){
     double somme = 0; //somme pour le calcul de la moyenne de la list dérivée sans 0
     int Nb = 0;       //Nb le valeurs dfférentes de 0
     double moy_sans_zero = 0;
-    for(int i; i < samples; i++){
+    for(int i = 0; i < samples; i++){
         if(vReal_der[i] > 0){   //on ne garde que les valeures positives pour détecter uniquement les fronts montants
         somme += vReal_der[i];
         Nb++;
         }
     }
     moy_sans_zero = somme/Nb;
-    for(int i; i < Nb; i++){
+    for(int i = 0; i < Nb; i++){
         if(vReal_der[i] > moy_sans_zero){
         vReal_bin[i] = 1;
         }
@@ -222,7 +225,7 @@ int Capteur::valid_freq(int Nvalid, int err){
       }
       if(compteur >= Nvalid){ //signal validé
         this->valid = 1;
-        return 0;
+        return 1;
       }
       else{ //signal non validé
         this->first_re = 0;  //en ms
@@ -231,7 +234,7 @@ int Capteur::valid_freq(int Nvalid, int err){
       }
     }
   }
-  Serial.println("No frequency validation");
+  //Serial.println("No frequency validation");
   return 0; //si aucun signal n'a été validé, retourne 0;
 }
 
@@ -400,7 +403,7 @@ void Capteur::detectionSimple_3(){
 /*------------------------------------OTHERS----------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 
-void Capteur::distance(int affiche = 0){
+void Capteur::distance(int affiche){
     dist = (first_re - first_em) * SOUND_SPEED * 0.5;
     dist_real_time = (first_re_real_time - first_em_real_time)*1000*SOUND_SPEED*0.5;  //*1000 car le temps est micros secondes
     if(affiche==1){
@@ -414,9 +417,9 @@ void Capteur::distance(int affiche = 0){
 }
 
 void Capteur::afficheReception(){
-  Serial.print("Capt");Serial.print(this->N_capt);Serial.print(";");
-  Serial.print("Valid = ");Serial.print(this->valid);Serial.print(";");
-  Serial.print("D = ");Serial.print(this->dist);
+  Serial.print("Capt");Serial.print(this->N_capt);Serial.print(" ; ");
+  Serial.print("Valid = ");Serial.print(this->valid);Serial.print(" ; ");
+  Serial.print("D = ");Serial.println(this->dist);
 }
 
 void Capteur::affiche(){
