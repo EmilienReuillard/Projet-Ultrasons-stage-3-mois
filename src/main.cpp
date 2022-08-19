@@ -37,10 +37,15 @@ Capteur Cap4(InpA0,8,9,13,4);
 Capteur Cap5(InpA1,10,11,15,5);
 Capteur Cap6(InpA2,12,13,17,6);
 
+//Initialisation du compteur de boucle
+int compt_loop = 0; //Compteur de boucle
+
 /*----------------------------------------------------------------------------------*/
 
 double seuil = 10000; //Arbitraire en fonction des meures testés
 int erreur = 1;  //erreur acceptable en ms
+
+
 int detection_mode = 0; 
 //0:emission salves simulanées 
 //1:emission simples || If this mode is enable, the periode in the declaration is useless
@@ -66,18 +71,14 @@ void setup()
   Cap5.defPinMod();
   Cap6.defPinMod();
   
-  //Emission
-  //defPinModMux(2,3,4,5);
-
   //Gestion fréquence
   sampling_period_us = round(1000000*(1.0/samplingFrequency));
-
   //Serial
   Serial.begin(115200);
   //Serial.begin(115200);
   while(!Serial);
   Serial.println("Ready");
-  delay(2000);
+  delay(8000);
 }
 
 /*---------------------------------------------------------------------------------------*/
@@ -144,7 +145,10 @@ void loop()
     Cap6.Prorocole_0();
 
     /*AFFICHAGE*/
-    
+    Serial.println("===================================");
+    Serial.println(millis()/1000);  //On affiche le temps en seconde
+    Serial.println("===================================\n");
+
     Cap0.afficheReception();
     Cap1.afficheReception();
     Cap2.afficheReception();
@@ -153,14 +157,16 @@ void loop()
     Cap5.afficheReception();
     Cap6.afficheReception();
     
-
     //Cap0.affiche();
 
-    Serial.println("===================================\n");
+    /*ETUDE INFLUENCE DE LA PERIODE SUR LA MESURE*/ //A commenter ça sinon ça bloque au bout de 20 itération par defaut
+    Cap0.N_detect_freq(compt_loop);
+    compt_loop++;
+    
 
     /* DELAY */
     //while(1);
-    delay(2000); /* Repeat after delay */
+    delay(0); /* Repeat after delay */
   break;
 
   /*---------------------------------------------------------------------------------------*/

@@ -54,6 +54,10 @@ class Capteur
     void afficheReception();  //Affiche pour chaque capteur si il reçoit ou non, ainsi que la distance
     void affiche(); //affiche les données essentielles
 
+    /*ETUDE DES RESUTATS*/
+    //Fonction qui va déterminer le nombre de validation pour N boucle. Crée pour évaluer l'influence de la Période T sur la mesure
+    void N_detect_freq(int compt_loop);  
+
   private:
 
     /* NOMBRE DE CAPT */
@@ -101,6 +105,10 @@ class Capteur
     /* Distances */
     double dist = 0;  //distance
     double dist_real_time = 0;  //distance calculé avec le temps réel
+
+    /*ETUDE DES RESUTATS*/
+    int N_loop = 100; //nombre de boucle que l'on va faire pour 1 échatillon
+    int N_succes = 0; //compte de nombre de validation en sur une étude
     
 };
 

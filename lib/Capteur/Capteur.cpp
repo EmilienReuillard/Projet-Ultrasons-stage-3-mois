@@ -248,7 +248,7 @@ int Capteur::Prorocole_0(){
   this->ech_a_zero();
   this->real2der();
   this->der2bin();
-  this->valid_freq(3,1);
+  this->valid_freq(4,1);
 }
 
 
@@ -425,7 +425,7 @@ void Capteur::afficheReception(){
   Serial.print("Capt");Serial.print(this->N_capt);Serial.print(" ; ");
   Serial.print("Valid = ");Serial.print(this->valid);Serial.print(" ; ");
   Serial.print("D = ");Serial.print(this->dist);Serial.print(" ; ");
-  Serial.print("Ms0 = ");Serial.println(this->moy_sans_zero);
+  Serial.print("Moy = ");Serial.println(this->moy);
 }
 
 void Capteur::affiche(){
@@ -448,4 +448,17 @@ void Capteur::affiche(){
 
   Serial.print("\nvalid: ");
   Serial.println(this->valid);
+}
+
+void Capteur::N_detect_freq(int compt_loop){
+  if(compt_loop < N_loop && this->valid == 1){
+    N_succes++;
+  }
+  if(compt_loop >= N_loop){
+    Serial.print("Capteur "); Serial.print(N_capt); Serial.print(" ; ");
+    Serial.print("N_succès = "); Serial.println(N_succes);
+
+    Serial.print("=====FIN DU PROGRAMME=====");
+    while(1);
+  }
 }
