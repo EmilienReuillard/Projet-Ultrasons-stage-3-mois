@@ -453,12 +453,13 @@ void Capteur::affiche(){
 void Capteur::N_detect_freq(int compt_loop){
   if(compt_loop < N_loop && this->valid == 1){
     N_succes++;
+    lst_comparaison_perf[compt_loop] = N_succes;
   }
   if(compt_loop >= N_loop){
     Serial.print("Capteur "); Serial.print(N_capt); Serial.print(" ; ");
     Serial.print("N_succès = "); Serial.println(N_succes);
 
     Serial.print("=====FIN DU PROGRAMME=====");
-    while(1);
+    //while(1);
   }
 }
