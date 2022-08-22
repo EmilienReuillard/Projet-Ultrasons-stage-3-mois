@@ -145,7 +145,7 @@ void loop()
 
     /*AFFICHAGE*/
     Serial.println("===================================");
-    Serial.println(millis()/1000.0);  //On affiche le temps en seconde
+    Serial.println(millis()/1000);  //On affiche le temps en seconde
     Serial.println("===================================\n");
 
     Cap0.afficheReception();
@@ -160,18 +160,8 @@ void loop()
 
     /*ETUDE INFLUENCE DE LA PERIODE SUR LA MESURE*/ //A commenter ça sinon ça bloque au bout de 20 itération par defaut
     Cap0.N_detect_freq(compt_loop);
-    Cap1.N_detect_freq(compt_loop);
-    Cap2.N_detect_freq(compt_loop);
-    Cap3.N_detect_freq(compt_loop);
-    Cap4.N_detect_freq(compt_loop);
-    Cap5.N_detect_freq(compt_loop);
-    Cap6.N_detect_freq(compt_loop);    
     compt_loop++;
     
-    if(compt_loop > 300){
-      affiche_validations(Cap0,Cap1,Cap2,Cap3,Cap4,Cap5,Cap6);
-      while(1);
-    }
 
     /* DELAY */
     //while(1);

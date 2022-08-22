@@ -56,11 +56,7 @@ class Capteur
 
     /*ETUDE DES RESUTATS*/
     //Fonction qui va déterminer le nombre de validation pour N boucle. Crée pour évaluer l'influence de la Période T sur la mesure
-    void N_detect_freq(int compt_loop); 
-    int N_loop = 300; //nombre de boucle que l'on va faire pour 1 échatillon
-    int N_succes = 0; //compte de nombre de validation en sur une étude
-    int lst_comparaison_perf[300];  //taille de N_loop
-    
+    void N_detect_freq(int compt_loop);  
 
   private:
 
@@ -109,6 +105,11 @@ class Capteur
     /* Distances */
     double dist = 0;  //distance
     double dist_real_time = 0;  //distance calculé avec le temps réel
+
+    /*ETUDE DES RESUTATS*/
+    int N_loop = 100; //nombre de boucle que l'on va faire pour 1 échatillon
+    int N_succes = 0; //compte de nombre de validation en sur une étude
+    
 };
 
 #endif
