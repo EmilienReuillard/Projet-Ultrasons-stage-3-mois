@@ -30,7 +30,6 @@ unsigned long microseconds;
 /*----------------------------------------------------------------------------------*/
 
 Capteur Cap0(InpA6,0,1,5,0);
-//Capteur Cap1(InpA5,2,3,7,1);
 Capteur Cap1(InpA5,2,3,7,1);
 Capteur Cap2(InpA4,4,5,9,2);
 Capteur Cap3(InpA3,6,7,11,3);
@@ -65,7 +64,7 @@ void setup()
   /*DEFINITION PINS*/
   //Réception
   Cap0.defPinMod();
-  //Cap1.defPinMod();
+  Cap1.defPinMod();
   Cap1.defPinMod();
   Cap2.defPinMod();
   Cap3.defPinMod();
@@ -75,9 +74,7 @@ void setup()
   
   //Gestion fréquence
   sampling_period_us = round(1000000*(1.0/samplingFrequency));
-  //Serial
   Serial.begin(115200);
-  //Serial.begin(115200);
   while(!Serial);
   Serial.println("Ready");
   delay(2000);
@@ -101,7 +98,6 @@ void loop()
   case 0:
     /*REMISE A ZEROS VARIABLES*/
     Cap0.MaZ();
-    //Cap1.MaZ();
     Cap1.MaZ();
     Cap2.MaZ();
     Cap3.MaZ();
@@ -116,7 +112,6 @@ void loop()
         /*EMISSION*/
 
         Cap0.emissionSalve(i);
-        //Cap1.emissionSalve(i);
         Cap1.emissionSalve(i);
         Cap2.emissionSalve(i);
         Cap3.emissionSalve(i);
@@ -126,7 +121,6 @@ void loop()
 
         /*RECEPTION*/
         Cap0.uploadData(i);
-        //Cap1.uploadData(i);
         Cap1.uploadData(i);
         Cap2.uploadData(i);
         Cap3.uploadData(i);
@@ -143,7 +137,6 @@ void loop()
     /* Traitement du signal */
     Cap0.Prorocole_0();
     //Cap1.Prorocole_0();
-    Cap1.Prorocole_0();
     Cap2.Prorocole_0();
     Cap3.Prorocole_0();
     Cap4.Prorocole_0();
@@ -156,7 +149,6 @@ void loop()
     Serial.println("===================================\n");
 
     Cap0.afficheReception();
-    //Cap1.afficheReception();
     Cap1.afficheReception();
     Cap2.afficheReception();
     Cap3.afficheReception();
@@ -168,7 +160,6 @@ void loop()
 
     /*ETUDE INFLUENCE DE LA PERIODE SUR LA MESURE*/ //A commenter ça sinon ça bloque au bout de 20 itération par defaut
     Cap0.N_detect_freq(compt_loop);
-    Cap1.N_detect_freq(compt_loop);
     Cap1.N_detect_freq(compt_loop);
     Cap2.N_detect_freq(compt_loop);
     Cap3.N_detect_freq(compt_loop);
