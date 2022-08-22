@@ -12,7 +12,8 @@ static inline void affiche_list(const double *list){
     }
 }
 
-static inline void affiche_validations(Capteur CapA,Capteur CapB,Capteur CapC,Capteur CapD,Capteur CapE,Capteur CapF,Capteur CapG, int N=300){
+/*
+static inline void affiche_validations(Capteur CapA,Capteur CapB,Capteur CapC,Capteur CapD,Capteur CapE,Capteur CapF,Capteur CapG, int N=100){
   Serial.println("===AFFICHAGE DES RECEPTIONS===");
   Serial.println("Cap0  Cap1  Cap2  Cap3  Cap4  Cap5  Cap6  Cap7");
   for(int i = 0 ; i < N ; i++){
@@ -26,7 +27,7 @@ static inline void affiche_validations(Capteur CapA,Capteur CapB,Capteur CapC,Ca
   }
   Serial.println("===FIN D'AFFICHAGE===");
 }
-
+*/
 /*
 void defPinModMux(int a,int b,int c,int d){
   pinMode(a,OUTPUT);

@@ -214,7 +214,7 @@ int Capteur::valid_freq(int Nvalid, int err){
       for(int j = 0; j < Nvalid; j++){
         if(i + j*delta >= samples){return 0;}
         
-        if((vReal_bin[i + j*delta] == 1 || vReal_bin[i + j*delta - err] == 1)&&(vReal_der[i]>1001)){  //Seconde condition pour contrer le bruit blanc
+        if((vReal_bin[i + j*delta] == 1 || vReal_bin[i + j*delta - err] == 1)){  //Seconde condition pour contrer le bruit blanc
           compteur++;
         }
       }
@@ -342,12 +342,17 @@ int Capteur::derivAndBinAuPas(int i){
 }
 
 int Capteur::detectionSimple(int i){ 
-  if(i < samples && this->lock_first_re == 0 && vReal_bin[i] == 1 ){
-    this->first_re = i*1000*(1.0/samplingFrequency);  //en ms
-    this->first_re_real_time = micros();
-    this->lock_first_re = 1;
+  if(i < samples && vReal_bin[i] == 1 ){
     this->valid = 1;
+    if(this->lock_first_re == 0 ){
+      this->first_re = i*1000*(1.0/samplingFrequency);  //en ms
+      this->first_re_real_time = micros();
+      this->lock_first_re = 1;
     }
+  }
+  else{
+    this->valid = 0;
+  }
   return 0;
 }
 
@@ -388,11 +393,13 @@ void Capteur::Prorocole_3(){
 
 void Capteur::detectionSimple_3(){
   for(int i = 0; i < samples ; i++){
-    if(lock_first_re == 0 && vReal_bin[i] == 1){
-      first_re = i;
-      first_em_real_time = micros();
-      valid = 1;
-      lock_first_re = 1;
+    if(vReal_bin[i] == 1){
+      this->valid = 1;
+      if(lock_first_re == 0){
+        first_re = i;
+        first_em_real_time = micros();
+        lock_first_re = 1;
+      }
     }
   }
 }
@@ -418,7 +425,7 @@ void Capteur::afficheReception(){
   Serial.print("Capt");Serial.print(this->N_capt);Serial.print(" ; ");
   Serial.print("Valid = ");Serial.print(this->valid);Serial.print(" ; ");
   Serial.print("D = ");Serial.print(this->dist);Serial.print(" ; ");
-  Serial.print("Moy = ");Serial.println(this->moy);
+  Serial.print("Moy = ");Serial.println(this->moy_sans_zero);
 }
 
 void Capteur::affiche(){
@@ -447,11 +454,12 @@ void Capteur::N_detect_freq(int compt_loop){
   if(compt_loop < N_loop && this->valid == 1){
     N_succes++;
   }
+  lst_comparaison_perf[compt_loop] = N_succes;
   if(compt_loop >= N_loop){
     Serial.print("Capteur "); Serial.print(N_capt); Serial.print(" ; ");
     Serial.print("N_succès = "); Serial.println(N_succes);
 
-    Serial.print("=====FIN DU PROGRAMME=====");
-    while(1);
+    //Serial.print("=====FIN DU PROGRAMME=====");
+    //while(1);
   }
 }

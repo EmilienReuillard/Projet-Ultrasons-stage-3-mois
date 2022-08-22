@@ -37,16 +37,18 @@ Capteur Cap4(InpA0,8,9,13,4);
 Capteur Cap5(InpA1,10,11,15,5);
 Capteur Cap6(InpA2,12,13,17,6);
 
-//Initialisation du compteur de boucle
-int compt_loop = 0; //Compteur de boucle
+
+/*===============MODE DE DETECTION=============*/
+int detection_mode = 1; 
+/*=============================================*/
+
 
 /*----------------------------------------------------------------------------------*/
-
+int compt_loop = 0;  //Initialisation du compteur de boucle
 double seuil = 10000; //Arbitraire en fonction des meures testés
 int erreur = 1;  //erreur acceptable en ms
+int N_echantillons = 100;
 
-
-int detection_mode = 0; 
 //0:emission salves simulanées 
 //1:emission simples || If this mode is enable, the periode in the declaration is useless
 //2:emission salves step by step
@@ -77,7 +79,7 @@ void setup()
   Serial.begin(115200);
   while(!Serial);
   Serial.println("Ready");
-  delay(2000);
+  delay(8000);
 }
 
 /*---------------------------------------------------------------------------------------*/
@@ -136,7 +138,7 @@ void loop()
     
     /* Traitement du signal */
     Cap0.Prorocole_0();
-    //Cap1.Prorocole_0();
+    Cap1.Prorocole_0();
     Cap2.Prorocole_0();
     Cap3.Prorocole_0();
     Cap4.Prorocole_0();
@@ -145,7 +147,7 @@ void loop()
 
     /*AFFICHAGE*/
     Serial.println("===================================");
-    Serial.println(millis()/1000);  //On affiche le temps en seconde
+    Serial.println(millis()/1000.0);  //On affiche le temps en seconde
     Serial.println("===================================\n");
 
     Cap0.afficheReception();
@@ -160,9 +162,31 @@ void loop()
 
     /*ETUDE INFLUENCE DE LA PERIODE SUR LA MESURE*/ //A commenter ça sinon ça bloque au bout de 20 itération par defaut
     Cap0.N_detect_freq(compt_loop);
-    compt_loop++;
-    
+    Cap1.N_detect_freq(compt_loop);
+    Cap2.N_detect_freq(compt_loop);
+    Cap3.N_detect_freq(compt_loop);
+    Cap4.N_detect_freq(compt_loop);
+    Cap5.N_detect_freq(compt_loop);
+    Cap6.N_detect_freq(compt_loop);
 
+    if(compt_loop >= N_echantillons){
+      Serial.println("===AFFICHAGE DES RECEPTIONS===");
+      Serial.println("Cap0  Cap1  Cap2  Cap3  Cap4  Cap5  Cap6");
+      for(int i = 0 ; i < N_echantillons ; i++){
+        Serial.print(Cap0.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.print(Cap1.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.print(Cap2.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.print(Cap3.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.print(Cap4.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.print(Cap5.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.println(Cap6.lst_comparaison_perf[i]);
+      }
+      Serial.println("===FIN D'AFFICHAGE===");
+      Serial.print("=====FIN DU PROGRAMME=====");
+      while(1);
+    }
+
+    compt_loop++;
     /* DELAY */
     //while(1);
     delay(0); /* Repeat after delay */
@@ -233,10 +257,37 @@ void loop()
     Cap6.afficheReception();
     Serial.println("===================================\n");
 
+    /*ETUDE INFLUENCE DE LA PERIODE SUR LA MESURE*/ //A commenter ça sinon ça bloque au bout de 20 itération par defaut
+    Cap0.N_detect_freq(compt_loop);
+    Cap1.N_detect_freq(compt_loop);
+    Cap2.N_detect_freq(compt_loop);
+    Cap3.N_detect_freq(compt_loop);
+    Cap4.N_detect_freq(compt_loop);
+    Cap5.N_detect_freq(compt_loop);
+    Cap6.N_detect_freq(compt_loop);
+
+    if(compt_loop >= N_echantillons){
+      Serial.println("===AFFICHAGE DES RECEPTIONS===");
+      Serial.println("Cap0  Cap1  Cap2  Cap3  Cap4  Cap5  Cap6");
+      for(int i = 0 ; i < N_echantillons ; i++){
+        Serial.print(Cap0.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.print(Cap1.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.print(Cap2.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.print(Cap3.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.print(Cap4.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.print(Cap5.lst_comparaison_perf[i]); Serial.print(" ");
+        Serial.println(Cap6.lst_comparaison_perf[i]);
+      }
+      Serial.println("===FIN D'AFFICHAGE===");
+      Serial.print("=====FIN DU PROGRAMME=====");
+      while(1);
+    }
+
+    compt_loop++;
 
     /* DELAY */
     //while(1);
-    delay(2000); /* Repeat after delay */
+    delay(0); /* Repeat after delay */
   break;
 
   

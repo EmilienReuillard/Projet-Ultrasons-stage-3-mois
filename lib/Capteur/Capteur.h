@@ -57,6 +57,7 @@ class Capteur
     /*ETUDE DES RESUTATS*/
     //Fonction qui va déterminer le nombre de validation pour N boucle. Crée pour évaluer l'influence de la Période T sur la mesure
     void N_detect_freq(int compt_loop);  
+    int lst_comparaison_perf[300];
 
   private:
 
@@ -91,7 +92,7 @@ class Capteur
     int first_re_real_time = 0;
 
     int compt = 0;          //compte le nombre d'émission
-    int N_em = 5;           //défini le nb d'émission voulues
+    int N_em = 6;           //défini le nb d'émission voulues
 
     /* Moyennes */
     double sum = 0; //somme de toutes les données d'une liste pour faire la moyenne après
