@@ -109,9 +109,6 @@ class Capteur
     /* Distances */
     double dist = 0;  //distance
     double dist_real_time = 0;  //distance calculé avec le temps réel
-
-    
-    
 };
 
 #endif

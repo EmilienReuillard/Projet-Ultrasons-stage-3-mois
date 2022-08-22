@@ -29,14 +29,7 @@ void Capteur::MaZ(){
     this->dist_real_time = 0;
     this->valid = 0;
     this->sum = 0;
-    this->moy_sans_zero = 0;
-    /*
-    delete[] vReal;    
-    delete[] vReal_ech;
-    delete[] vReal_der;
-    delete[] vReal_bin;
-    delete[] vImag; 
-    */   
+    this->moy_sans_zero = 0; 
 }
 
 /*----------------------------------------------------------------------------------*/
@@ -459,7 +452,7 @@ void Capteur::N_detect_freq(int compt_loop){
     Serial.print("Capteur "); Serial.print(N_capt); Serial.print(" ; ");
     Serial.print("N_succès = "); Serial.println(N_succes);
 
-    Serial.print("=====FIN DU PROGRAMME=====");
+    //Serial.print("=====FIN DU PROGRAMME=====");
     //while(1);
   }
 }

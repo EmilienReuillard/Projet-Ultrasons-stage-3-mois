@@ -12,17 +12,17 @@ static inline void affiche_list(const double *list){
     }
 }
 
-static inline void affiche_validations(Capteur Cap0,Capteur Cap1,Capteur Cap2,Capteur Cap3,Capteur Cap4,Capteur Cap5,Capteur Cap6, int N=300){
+static inline void affiche_validations(Capteur CapA,Capteur CapB,Capteur CapC,Capteur CapD,Capteur CapE,Capteur CapF,Capteur CapG, int N=300){
   Serial.println("===AFFICHAGE DES RECEPTIONS===");
   Serial.println("Cap0  Cap1  Cap2  Cap3  Cap4  Cap5  Cap6  Cap7");
   for(int i = 0 ; i < N ; i++){
-    Serial.print(Cap0.lst_comparaison_perf[i]); Serial.print(";");
-    Serial.print(Cap1.lst_comparaison_perf[i]); Serial.print(";");
-    Serial.print(Cap2.lst_comparaison_perf[i]); Serial.print(";");
-    Serial.print(Cap3.lst_comparaison_perf[i]); Serial.print(";");
-    Serial.print(Cap4.lst_comparaison_perf[i]); Serial.print(";");
-    Serial.print(Cap5.lst_comparaison_perf[i]); Serial.print(";");
-    Serial.println(Cap6.lst_comparaison_perf[i]);
+    Serial.print(CapA.lst_comparaison_perf[i]); Serial.print(";");
+    Serial.print(CapB.lst_comparaison_perf[i]); Serial.print(";");
+    Serial.print(CapC.lst_comparaison_perf[i]); Serial.print(";");
+    Serial.print(CapD.lst_comparaison_perf[i]); Serial.print(";");
+    Serial.print(CapE.lst_comparaison_perf[i]); Serial.print(";");
+    Serial.print(CapF.lst_comparaison_perf[i]); Serial.print(";");
+    Serial.println(CapG.lst_comparaison_perf[i]);
   }
   Serial.println("===FIN D'AFFICHAGE===");
 }
