@@ -568,8 +568,6 @@ void loop()
     Cap6.afficheReception();
 
     Serial.println("===================================\n");
-
-
   break;
 
   }

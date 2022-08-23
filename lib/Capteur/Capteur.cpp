@@ -221,6 +221,7 @@ int Capteur::valid_freq(int Nvalid, int err){
       
       if(compteur >= Nvalid){ //signal validé
         this->valid = 1;
+        this->distance(); //On calcule la distance
         //Serial.print("first reception : ");Serial.println(this->first_re);
         return 1;
       }
@@ -237,11 +238,11 @@ int Capteur::valid_freq(int Nvalid, int err){
 }
 
 int Capteur::Prorocole_0(){
-  this->moyenne();
-  this->ech_a_zero();
-  this->real2der();
-  this->der2bin();
-  this->valid_freq(4,1);
+  this->moyenne();        //On fait la moyenne des données
+  this->ech_a_zero();     //On échelonne les donné à cette moyenne
+  this->real2der();       //On dérive la liste
+  this->der2bin();        //Passage en binaire|| 1 : reception/ 0 : pas de réception
+  this->valid_freq(4,1);  //On cherche la fréquence du capteur
 }
 
 
